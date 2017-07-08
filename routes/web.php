@@ -12,7 +12,9 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+
+    $posts = App\Post::where('id','>=',1)->where('status','=',0)->paginate(4);
+    return view('posts.public',compact('posts'));
 });
 
 Auth::routes();
