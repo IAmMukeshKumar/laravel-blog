@@ -18,6 +18,7 @@ class AdminTableSeeder extends Seeder
             'email' => 'william.mukesh@ithands.biz',
             'password' => bcrypt('password'),
             'role'=>1,
+
         ]);
     }
 }

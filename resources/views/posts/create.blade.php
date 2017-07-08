@@ -30,14 +30,29 @@
                                     <p class="help-block">{{$errors->first('content')}}</p>
                                 @endif
                             </div>
+
+
+
                             <div class="form-group @if($errors->has('category')) has-error @endif">
-                                <label> Category</label>
-                                <input type="text" class="form-control" placeholder="category" name="category"
-                                       value="{{old('category')}}">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                        Category <span class="caret"></span>
+                                    </a>
+
+                                    <ul class="dropdown-menu" role="menu">
+                                           @for($i=0;$i<5;$i++)
+                                            <li>Name {{$i}}</li>
+                                            @endfor
+                                    </ul>
+                                </li>
                                 @if($errors->has('category'))
                                     <p class="help-block">{{$errors->first('category')}}</p>
                                 @endif
                             </div>
+
+
+
+
                             <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
                                 <label for="status" class="col-md-4 control-label">status</label>
                                 Draft:

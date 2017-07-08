@@ -7,7 +7,12 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                             <h1>{{$post->title}}</h1>
-                            <h4 style="font-style:italic;display:inline-block;">Category</h4>
+                           <h4 style="font-style:italic;display:inline-block;">{{$post->category->category}}</h4>
+                        <p>
+                            @if($post->created_at)
+                                Created at :{{$post->created_at}}
+                                @endif
+                        </p>
                         <hr>
                         <p> {{$post->content}}</p>
 

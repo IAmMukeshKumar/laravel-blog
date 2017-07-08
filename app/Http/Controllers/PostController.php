@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PostRequest;
 use Illuminate\Http\Request;
 use App\Post;
+use App\Category;
 
 class PostController extends Controller
 {
@@ -16,12 +17,13 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::where('id', '>=', 1)->paginate(5);
-
         if (auth()->user()->role == 1)
         {
             return view('posts.admin', compact('posts'));
         }
     }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -59,6 +61,15 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::findOrFail($id);
+//        $post =Post::find(3);
+//        echo $post->category->id;
+
+//        $mposts=Category::find($post->category_id)->posts;
+//        foreach($mposts as $post)
+//        {
+//            echo $post->title;
+//        }
+
         return view('posts.show', compact('post'));
     }
 

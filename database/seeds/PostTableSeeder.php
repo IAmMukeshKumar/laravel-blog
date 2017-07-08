@@ -14,14 +14,14 @@ class PostTableSeeder extends Seeder
         DB::table('posts')->insert([
             'title'=>'Post one',
             'content'=>'This is the demo content one',
-            'category'=>'Category one',
+            'category_id'=>1,
             'status'=>1,
         ]);
 
         DB::table('posts')->insert([
             'title'=>'Post two',
             'content'=>'This is the demo content two',
-            'category'=>'Category two',
+            'category_id'=>2,
             'status'=>0,
         ]);
     }
