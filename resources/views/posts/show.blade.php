@@ -6,12 +6,12 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                            <h1>{{$post->title}}</h1>
-                           <h4 style="font-style:italic;display:inline-block;">{{$post->category->category}}</h4>
+                        <h1>{{$post->title}}</h1>
+                        <h4 style="font-style:italic;display:inline-block;">{{$post->category->category}}</h4>
                         <p>
                             @if($post->created_at)
                                 Created at :{{$post->created_at}}
-                                @endif
+                            @endif
                         </p>
                         <hr>
                         <p> {{$post->content}}</p>

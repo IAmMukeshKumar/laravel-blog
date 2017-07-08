@@ -12,7 +12,7 @@
                     <div class="panel-heading">Update Post</div>
 
                     <div class="panel-body">
-                        <form action="{{route('post.update',$post->id)}}" method="post" id="update-task-form">
+                        <form action="{{route('update',$post->id)}}" method="post" id="update-task-form">
                             {{method_field('PATCH')}}
                             {{csrf_field()}}
                             <div class="form-group @if($errors->has('title')) has-error @endif">
@@ -35,7 +35,7 @@
                             <div class="form-group @if($errors->has('category')) has-error @endif">
                                 <label> Category</label>
                                 <input type="text" class="form-control" placeholder="category" name="category"
-                                       value="{{old('category',$post->category)}}">
+                                       value="{{old('category',$post->category->category)}}">
                                 @if($errors->has('category'))
                                     <p class="help-block">{{$errors->first('category')}}</p>
                                 @endif

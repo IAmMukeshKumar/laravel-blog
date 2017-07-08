@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\PostRequest;
 use Illuminate\Http\Request;
 use App\Post;
-use App\Category;
 
 class PostController extends Controller
 {
@@ -14,15 +13,27 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::where('id', '>=', 1)->paginate(5);
-        if (auth()->user()->role == 1)
-        {
+        $paginate = $request->has('paginate') ? $request->input('paginate') : 5;
+        $posts = Post::where('id', '>=', 1)
+            ->where(function ($query) use ($request) {
+                if ($request->has('title'))
+                    $query->where('title', 'like', '%' . $request->input('title') . '%');
+
+                if ($request->has('content'))
+                    $query->where('content', 'like', '%' . $request->input('content') . '%');
+            })
+            ->when($request->has('status'), function ($query) use ($request) {
+                return $query->where('status', '=', 1);
+            })->paginate((int)$paginate);
+        if (!empty(auth()->user()->role)) {
             return view('posts.admin', compact('posts'));
         }
+        else{
+            return view('posts.public', compact('posts'));
+        }
     }
-
 
 
     /**
@@ -61,15 +72,6 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::findOrFail($id);
-//        $post =Post::find(3);
-//        echo $post->category->id;
-
-//        $mposts=Category::find($post->category_id)->posts;
-//        foreach($mposts as $post)
-//        {
-//            echo $post->title;
-//        }
-
         return view('posts.show', compact('post'));
     }
 

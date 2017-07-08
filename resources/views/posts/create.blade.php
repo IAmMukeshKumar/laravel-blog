@@ -11,7 +11,7 @@
                     @endif
                     <div class="panel-heading">Update Post</div>
                     <div class="panel-body">
-                        <form action="{{route('post.store')}}" method="post" id="update-task-form">
+                        <form action="{{route('store')}}" method="post" id="update-task-form">
                             {{csrf_field()}}
                             <div class="form-group @if($errors->has('title')) has-error @endif">
                                 <label> Title</label>

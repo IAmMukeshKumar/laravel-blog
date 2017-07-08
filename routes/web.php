@@ -10,15 +10,21 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-
-    $posts = App\Post::where('id','>=',1)->where('status','=',0)->paginate(4);
-    return view('posts.public',compact('posts'));
-});
+//
+//Route::get('/postuyt', function () {
+//    if (!empty(auth()->user()->role)) {
+//        $posts = App\Post::where('id', '>=', 1)->paginate(1);
+//
+//    } else {
+//        $posts = App\Post::where('id', '>=', 1)->where('status', '=', 0)->paginate(1);
+//
+//    }
+//    return view('posts.public', compact('posts'));
+//
+//});
 
 Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('post', 'PostController');
+Route::resource('/','PostController');
