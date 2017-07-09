@@ -12,7 +12,7 @@
                     <div class="panel-heading">Update Post</div>
 
                     <div class="panel-body">
-                        <form action="{{route('update',$post->id)}}" method="post" id="update-task-form">
+                        <form action="{{route('post.update',$post->id)}}" method="post" id="update-task-form">
                             {{method_field('PATCH')}}
                             {{csrf_field()}}
                             <div class="form-group @if($errors->has('title')) has-error @endif">

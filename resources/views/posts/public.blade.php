@@ -6,7 +6,7 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="well">
-                            <form class="form-inline" action="{{route('index')}}" method="get">
+                            <form class="form-inline" action="{{route('post.index')}}" method="get">
                                 <div class="form-group">
                                     <select class="form-control" name="paginate" value="{{request('paginate')}}">
                                         <option value="5">5</option>
@@ -25,10 +25,10 @@
                                     <input type="text" class="form-control" name="content" placeholder="Content"
                                            value="{{request('content')}}">
                                 </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="category" placeholder="Category"
-                                           value="{{request('category')}}">
-                                </div>
+                                {{--<div class="form-group">--}}
+                                    {{--<input type="text" class="form-control" name="category" placeholder="Category"--}}
+                                           {{--value="{{request('category')}}">--}}
+                                {{--</div>--}}
                                 <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i>
                                     Search
                                 </button>
@@ -37,7 +37,7 @@
                         <h1>{{"Posts"}}</h1>
                         <hr>
                           @foreach($posts as $post)
-                            <h1> <a href="{{route('show',$post->id)}}">{{$post->title}}</a> <div style="font-size:15px;display:inline-block;"> Created at: {{$post->created_at}} Last update: {{$post->updated_at}}</div></h1>
+                            <h1> <a href="{{route('post.show',$post->id)}}">{{$post->title}}</a> <div style="font-size:15px;display:inline-block;"> Created at: {{$post->created_at}} Last update: {{$post->updated_at}}</div></h1>
                            <h4> {{$post->category->category}}</h4>
                             {{$post->content}}
                             <hr>

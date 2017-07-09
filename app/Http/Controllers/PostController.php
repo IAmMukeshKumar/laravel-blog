@@ -31,6 +31,7 @@ class PostController extends Controller
             return view('posts.admin', compact('posts'));
         }
         else{
+            $posts->where('status', '=', 0);
             return view('posts.public', compact('posts'));
         }
     }
