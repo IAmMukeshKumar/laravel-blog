@@ -28,20 +28,17 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-
                 <!-- Branding Image -->
                 {{--<a class="navbar-brand" href="{{ url('/') }}">--}}
                 {{--{{ config('app.name', 'Laravel') }}--}}
                 {{--</a>--}}
                 <h3>Laravel Blog</h3>
             </div>
-
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     &nbsp;
                 </ul>
-
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
@@ -49,17 +46,15 @@
                         <li><a href="{{ route('login') }}">Login</a></li>
                         {{--<li><a href="{{ route('register') }}">Register</a></li>--}}
                     @else
-                        @if(!empty(auth()->user()->role))
-                            <li><a href="{{route('category.index')}}"><i>CRUD on category</i></a></li>
-                        <li><a href="{{route('post.index')}}"><i class="glyphicon glyphicon-th-list"></i></a></li>
-                            <li><a href="{{route('post.create')}}"><i class="glyphicon glyphicon-plus"></i></a></li>
-                        @endif
+                        <li><a href="{{route('category.index')}}">Category</a></li>
+                        <li><a href="{{route('post.index')}}"><i class="glyphicon glyphicon-th-list"></i>Posts</a></li>
+                        <li><a href="{{route('post.create')}}"><i class="glyphicon glyphicon-plus"> </i>New Post</a>
+                        </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-expanded="false">
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
-
                             <ul class="dropdown-menu" role="menu">
                                 <li>
                                     <a href="{{ route('logout') }}"
@@ -67,7 +62,6 @@
                                                      document.getElementById('logout-form').submit();">
                                         Logout
                                     </a>
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                           style="display: none;">
                                         {{ csrf_field() }}
@@ -80,7 +74,6 @@
             </div>
         </div>
     </nav>
-
     @yield('content')
 </div>
 

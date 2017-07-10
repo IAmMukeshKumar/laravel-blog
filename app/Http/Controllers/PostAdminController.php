@@ -1,13 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Http\Requests\PostRequest;
 use Illuminate\Http\Request;
 use App\Post;
-
-class PostController extends Controller
+use App\Category;
+class PostAdminController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     /**
      * Display a listing of the resource.
      *
@@ -16,26 +20,18 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $paginate = $request->has('paginate') ? $request->input('paginate') : 5;
-        $posts = Post::where('id', '>=', 1)
-            ->where(function ($query) use ($request) {
+
+        $posts = Post::where(function ($query) use ($request) {
                 if ($request->has('title'))
                     $query->where('title', 'like', '%' . $request->input('title') . '%');
-
-                if ($request->has('content'))
-                    $query->where('content', 'like', '%' . $request->input('content') . '%');
+                if ($request->has('body'))
+                    $query->where('body', 'like', '%' . $request->input('body') . '%');
             })
             ->when($request->has('status'), function ($query) use ($request) {
                 return $query->where('status', '=', 1);
             })->paginate((int)$paginate);
-        if (!empty(auth()->user()->role)) {
-            return view('posts.admin', compact('posts'));
-        }
-        else{
-            $posts->where('status', '=', 0);
-            return view('posts.public', compact('posts'));
-        }
+        return view('posts.admin.index',compact('posts'));
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -44,7 +40,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        $categories = Category::all();
+        return view('posts.admin.create', compact('categories'));
     }
 
     /**
@@ -57,8 +54,8 @@ class PostController extends Controller
     {
         $post = new Post;
         $post->title = $request->title;
-        $post->content = $request->content;
-        $post->category = $request->category;
+        $post->body = $request->body;
+        $post->category_id = $request->category;
         $post->status = $request->status;
         $post->save();
         return back()->with('success', 'Post saved');
@@ -73,7 +70,7 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::findOrFail($id);
-        return view('posts.show', compact('post'));
+        return view('posts.admin.show', compact('post'));
     }
 
     /**
@@ -84,9 +81,9 @@ class PostController extends Controller
      */
     public function edit($id)
     {
+        $categories = Category::all();
         $post = Post::findOrFail($id);
-
-        return view('posts.edit', compact('post'));
+        return view('posts.admin.edit', ['post' => $post, 'categories' => $categories]);
 
     }
 
@@ -101,8 +98,8 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
         $post->title = $request->title;
-        $post->content = $request->content;
-        $post->category = $request->category;
+        $post->body = $request->body;
+        $post->category_id = $request->category;
         $post->status = $request->status;
         $post->save();
         return back()->with('success', 'Updated');
@@ -118,6 +115,6 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
         $post->delete();
-        return view('posts.delete');
+        return back()->with('success','One post deleted');
     }
 }

@@ -6,12 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    protected $fillable = [
-        'title', 'content', 'category', 'status',
+    protected $guarded = [
+        'id', 'created_at', 'updated_at', 'deleted_at'
     ];
 
     public function category()
     {
         return $this->belongsTo('App\Category');
     }
+
 }

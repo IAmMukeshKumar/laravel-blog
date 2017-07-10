@@ -5,12 +5,11 @@
             <div class="col-md-10 col-md-offset-1">
                 @if(session('success'))
                     <div class="alert alert-success">
-                        <i class="glyphicon glyphicon-ok"></i>   {{session('success')}}
+                        <i class="glyphicon glyphicon-ok"></i> {{session('success')}}
                     </div>
                 @endif
                 <div class="panel panel-default">
                     <div class="panel-heading">Update Post</div>
-
                     <div class="panel-body">
                         <form action="{{route('post.update',$post->id)}}" method="post" id="update-task-form">
                             {{method_field('PATCH')}}
@@ -23,19 +22,24 @@
                                     <p class="help-block">{{$errors->first('title')}}</p>
                                 @endif
                             </div>
-
-                            <div class="form-group @if($errors->has('content')) has-error @endif">
-                                <label>Content</label>
+                            <div class="form-group @if($errors->has('body')) has-error @endif">
+                                <label>Body</label>
                                 <textarea class="form-control" rows="3" placeholder="Write something"
-                                          name="content"> {{old('content',$post->content)}}</textarea>
-                                @if($errors->has('content'))
-                                    <p class="help-block">{{$errors->first('content')}}</p>
+                                          name="body"> {{old('body',$post->body)}}</textarea>
+                                @if($errors->has('body'))
+                                    <p class="help-block">{{$errors->first('body')}}</p>
                                 @endif
                             </div>
                             <div class="form-group @if($errors->has('category')) has-error @endif">
-                                <label> Category</label>
-                                <input type="text" class="form-control" placeholder="category" name="category"
-                                       value="{{old('category',$post->category->category)}}">
+                                {{"Category : "}}
+                                <select name="category">
+                                    <option value="{{$post->category->id}}">{{$post->category->category}}</option>
+                                    @foreach($categories as $category)
+                                        @if($category->id!=$post->category->id)
+                                            <option value="{{$category->id}}">{{$category->category}}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
                                 @if($errors->has('category'))
                                     <p class="help-block">{{$errors->first('category')}}</p>
                                 @endif
@@ -60,5 +64,4 @@
                 </div>
             </div>
         </div>
-
-@endsection
+ @endsection

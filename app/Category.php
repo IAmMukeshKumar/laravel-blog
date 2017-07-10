@@ -6,11 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-//    public function posts()
-//    {
-//        return $this->hasMany('App\Post');
-//    }
 
-     protected $fillable=['category'];
+    protected $guarded = [
+        'id', 'created_at', 'updated_at', 'deleted_at'
+    ];
+
+    public function posts()
+    {
+        return $this->hasMany('App\Post');
+    }
 
 }

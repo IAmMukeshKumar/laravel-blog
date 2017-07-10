@@ -3,6 +3,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        <i class="glyphicon glyphicon-ok"></i> {{session('success')}}
+                    </div>
+                @endif
                 <div class="panel panel-default">
                     <h3 class="panel-heading">{{"Posts"}}</h3>
                     <div class="panel-body">
@@ -23,8 +28,8 @@
                                            value="{{request('title')}}">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="content" placeholder="Content"
-                                           value="{{request('content')}}">
+                                    <input type="text" class="form-control" name="body" placeholder="body"
+                                           value="{{request('body')}}">
                                 </div>
                                 <div class="form-group">
                                     <label class="checkbox">
@@ -41,7 +46,7 @@
                             <thead>
                             <tr>
                                 <th>Title</th>
-                                <th>Content</th>
+                                <th>Body</th>
                                 <th>Category</th>
                                 <th>Status</th>
                                 <th>Actions</th>
@@ -51,7 +56,7 @@
                             @foreach($posts as $post)
                                 <tr>
                                     <td>{{$post->title}}</td>
-                                    <td>  {{$post->content}}</td>
+                                    <td> {{str_limit($post->body,30)}}</td>
                                     <td>{{$post->category->category}}</td>
                                     <td> {{$post->status?'Draft':'Public'}}</td>
                                     <td>

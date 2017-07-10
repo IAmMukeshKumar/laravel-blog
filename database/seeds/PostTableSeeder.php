@@ -12,17 +12,11 @@ class PostTableSeeder extends Seeder
     public function run()
     {
         DB::table('posts')->insert([
-            'title'=>'Post one',
-            'content'=>'This is the demo content one',
-            'category_id'=>1,
-            'status'=>1,
-        ]);
-
-        DB::table('posts')->insert([
-            'title'=>'Post two',
-            'content'=>'This is the demo content two',
-            'category_id'=>2,
-            'status'=>0,
+            'title' => 'Post one',
+            'body' => 'This is the demo content one',
+            'category_id' => 1,
+            'status' => 1,
+            'created_at' => \Carbon\Carbon::now(),
         ]);
     }
 }

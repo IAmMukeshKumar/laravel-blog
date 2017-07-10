@@ -21,6 +21,14 @@
                                     <p class="help-block">{{$errors->first('category')}}</p>
                                 @endif
                             </div>
+                            <div class="form-group @if($errors->has('description')) has-error @endif">
+                                <label>Description</label>
+                                <textarea class="form-control" rows="3" placeholder="Optional"
+                                          name="description"> {{old('description')}}</textarea>
+                                @if($errors->has('description'))
+                                    <p class="help-block">{{$errors->first('description')}}</p>
+                                @endif
+                            </div>
                             <button type="submit" class="btn btn-primary">Add</button>
                         </form>
                     </div>

@@ -1,9 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Http\Requests\CategoryRequest;
 use Illuminate\Http\Request;
 use App\Category;
+
 class CategoryController extends Controller
 {
     /**
@@ -14,19 +16,19 @@ class CategoryController extends Controller
     public function index(Request $request)
     {
         $paginate = $request->has('paginate') ? $request->input('paginate') : 5;
-        $categories = Category::where('id', '>=', 1)
-            ->where(function ($query) use ($request) {
+
+        $categories = Category::
+            where(function ($query) use ($request) {
                 if ($request->has('category'))
                     $query->where('category', 'like', '%' . $request->input('category') . '%');
             })
+            ->withCount('posts')
             ->paginate((int)$paginate);
 
 
-        if(!empty(auth()->user()->role))
-        {
-            return view('categories.index',compact('categories'));
-        }
-        else{
+        if (!empty(auth()->user()->role)) {
+            return view('categories.index', compact('categories'));
+        } else {
             echo "You are not authorized for this action";
         }
     }
@@ -45,65 +47,58 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(CategoryRequest $request)
     {
-        $category=new Category;
-        $category->category=$request->category;
+        $category = new Category;
+        $category->category = $request->category;
+        $category->description=$request->description;
         $category->save();
-        return back()->with('success','Category added');
+        return back()->with('success', 'Category added');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-      echo "<h1>Not Valid Link</h1>";
-    }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-       $category=Category::findOrFail($id);
-       return view('categories.edit',compact('category'));
+        $category = Category::findOrFail($id);
+        return view('categories.edit', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function update(CategoryRequest $request, $id)
     {
-        $category=Category::findOrFail($id);
-        $category->category=$request->category;
+        $category = Category::findOrFail($id);
+        $category->category = $request->category;
         $category->save();
-        return back()->with('success','Category updated');
+
+        return back()->with('success', 'Category updated');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $category=Category::findOrFail($id);
+        $category = Category::findOrFail($id);
         $category->delete();
-       return view('categories.delete');
+
+        return back()->with('success','Category was deleted.');
     }
 }

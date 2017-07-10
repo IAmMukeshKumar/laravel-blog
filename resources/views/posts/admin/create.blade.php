@@ -6,7 +6,7 @@
                 <div class="panel panel-default">
                     @if(session('success'))
                         <div class="alert alert-success">
-                            <i class="glyphicon glyphicon-ok"></i>   {{session('success')}}
+                            <i class="glyphicon glyphicon-ok"></i> {{session('success')}}
                         </div>
                     @endif
                     <div class="panel-heading">New Post</div>
@@ -22,35 +22,25 @@
                                 @endif
                             </div>
 
-                            <div class="form-group @if($errors->has('content')) has-error @endif">
-                                <label>Content</label>
-                                <textarea class="form-control" rows="3" placeholder="Write something"
-                                          name="content"> {{old('content')}}</textarea>
-                                @if($errors->has('content'))
-                                    <p class="help-block">{{$errors->first('content')}}</p>
+                            <div class="form-group @if($errors->has('body')) has-error @endif">
+                                <label>Body</label>
+                                <textarea class="form-control" rows="10" placeholder="Write something"
+                                          name="body"> {{old('body')}}</textarea>
+                                @if($errors->has('body'))
+                                    <p class="help-block">{{$errors->first('body')}}</p>
                                 @endif
                             </div>
-
-
-
                             <div class="form-group @if($errors->has('category')) has-error @endif">
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                        Category <span class="caret"></span>
-                                    </a>
-
-                                    <ul class="dropdown-menu" role="menu">
-                                           @for($i=0;$i<5;$i++)
-                                            <li>Name {{$i}}</li>
-                                            @endfor
-                                    </ul>
-                                </li>
+                                {{"Category : "}}
+                                <select name="category">
+                                    @foreach($categories as $category)
+                                        <option value="{{$category->id}}">{{$category->category}}</option>
+                                        @endforeach
+                                </select>
                                 @if($errors->has('category'))
                                     <p class="help-block">{{$errors->first('category')}}</p>
                                 @endif
                             </div>
-
-
 
 
                             <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
@@ -67,7 +57,7 @@
                                     </span>
                                 @endif
                             </div>
-                            <button type="submit" class="btn btn-primary">Update</button>
+                            <button type="submit" class="btn btn-primary">Publish</button>
                         </form>
                     </div>
                 </div>

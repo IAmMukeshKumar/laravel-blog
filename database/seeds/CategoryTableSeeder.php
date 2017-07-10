@@ -13,9 +13,13 @@ class CategoryTableSeeder extends Seeder
     {
         DB::table('categories')->insert([
             'category'=>'Education',
+            'description'=>'Education makes man civilized',
+            'created_at'=>\Carbon\Carbon::now(),
         ]);
         DB::table('categories')->insert([
             'category'=>'World',
+            'description'=>'This world is very chromatic',
+            'created_at'=>\Carbon\Carbon::now(),
         ]);
     }
 }

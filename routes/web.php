@@ -11,21 +11,22 @@
 |
 */
 //
-Route::get('/', function () {
-    if (!empty(auth()->user()->role)) {
-        $posts = App\Post::where('id', '>=', 1)->paginate(1);
 
-    } else {
-        $posts = App\Post::where('id', '>=', 1)->where('status', '=', 0)->paginate(1);
 
-    }
-    return view('posts.public', compact('posts'));
-
-});
+Route::get('/','PostPublicController@index')->name('publicpost.index');
+Route::get('show/{id}','PostPublicController@show')->name('publicpost.show');
 
 Auth::routes();
 
+Route::middleware('auth')->group(function()
+{
+    Route::resource('post', 'PostAdminController');
+
+    Route::resource('category', 'CategoryController', [
+        'except' => 'show'
+    ]);
+});
+
 //Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('post','PostController');
-Route::resource('category','CategoryController');
+

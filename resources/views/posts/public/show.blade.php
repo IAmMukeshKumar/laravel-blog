@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
     <div class="container">
         <div class="row">
@@ -10,12 +9,11 @@
                         <h4 style="font-style:italic;display:inline-block;">{{$post->category->category}}</h4>
                         <p>
                             @if($post->created_at)
-                                Created at :{{$post->created_at}}
+                                Created at :{{$post->created_at->format('Y-m-d')}}
                             @endif
                         </p>
                         <hr>
-                        <p> {{$post->content}}</p>
-
+                        <p> {{$post->body}}</p>
                     </div>
                 </div>
             </div>

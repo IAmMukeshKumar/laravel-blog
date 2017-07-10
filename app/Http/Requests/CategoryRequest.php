@@ -25,6 +25,7 @@ class CategoryRequest extends FormRequest
     {
         return [
                'category'=>'required|max:10|unique:categories',
+               'description'=>'max:50',
         ];
     }
 }
