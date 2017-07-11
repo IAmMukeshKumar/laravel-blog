@@ -16,11 +16,11 @@
                                 <div class="form-group">
                                     <select class="form-control" name="paginate" value="{{request('paginate')}}">
                                         <option value="5">5</option>
-                                        <option value="2">2</option>
-                                        <option value="4">4</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
+                                        <option value="10">2</option>
+                                        <option value="15">15</option>
+                                        <option value="25">25</option>
+                                        <option value="40">40</option>
+                                        <option value="55">55</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -45,15 +45,17 @@
                         <table class="table table-hover">
                             <thead>
                             <tr>
+                                <div class="text-center">
                                 <th>Title</th>
                                 <th>Body</th>
                                 <th>Category</th>
                                 <th>Status</th>
                                 <th>Actions</th>
+                                </div>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($posts as $post)
+                            @forelse($posts as $post)
                                 <tr>
                                     <td>{{$post->title}}</td>
                                     <td> {{str_limit($post->body,30)}}</td>
@@ -73,7 +75,11 @@
                                         </form>
                                     </td>
                                 </tr>
-                            @endforeach
+                           @empty
+                                <div class="text-center">
+                               {{"No data found"}}
+                                </div>
+                                @endforelse
                             </tbody>
                         </table>
                         <div class="text-center">

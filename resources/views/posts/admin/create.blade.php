@@ -35,7 +35,7 @@
                                 <select name="category">
                                     @foreach($categories as $category)
                                         <option value="{{$category->id}}">{{$category->category}}</option>
-                                        @endforeach
+                                    @endforeach
                                 </select>
                                 @if($errors->has('category'))
                                     <p class="help-block">{{$errors->first('category')}}</p>
@@ -63,5 +63,5 @@
                 </div>
             </div>
         </div>
-
+    </div>
 @endsection

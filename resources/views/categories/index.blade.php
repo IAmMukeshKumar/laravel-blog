@@ -10,11 +10,11 @@
                                 <div class="form-group">
                                     <select class="form-control" name="paginate" value="{{request('paginate')}}">
                                         <option value="5">5</option>
-                                        <option value="2">2</option>
-                                        <option value="4">4</option>
-                                        <option value="6">6</option>
-                                        <option value="7">7</option>
-                                        <option value="8">8</option>
+                                        <option value="10">10</option>
+                                        <option value="15">15</option>
+                                        <option value="25">25</option>
+                                        <option value="40">40</option>
+                                        <option value="55">55</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -35,7 +35,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($categories as $category)
+                            @forelse($categories as $category)
                                 <tr>
                                     <td>{{$category->category}}</td>
                                     <td>{{$category->posts_count}}</td>
@@ -47,12 +47,17 @@
                                               onsubmit="return confirm('Are you sure ?')" style="display:inline-block;">
                                             {{method_field('DELETE')}}
                                             {{csrf_field()}}
-                                            <button type="submit" class="btn btn-danger btn-xs">
+                                            <button type="submit"
+                                                    class="btn btn-danger btn-xs" {{$category->posts_count ? "disabled":""}}>
                                                 <i class="glyphicon glyphicon-trash"></i></button>
                                         </form>
                                     </td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <div class="text-center">
+                                    {{"No data found"}}
+                                </div>
+                            @endforelse
                             <a class="btn btn-primary btn-xs" href="{{route('category.create')}}"><i
                                         class="glyphicon glyphicon-plus"></i> New category</a>
                             </tbody>

@@ -10,10 +10,12 @@
                                 <div class="form-group">
                                     <select class="form-control" name="paginate" value="{{request('paginate')}}">
                                         <option value="5">5</option>
-                                        <option value="2">2</option>
-                                        <option value="4">4</option>
-                                        <option value="6">6</option>
-                                        <option value="8">8</option>
+                                        <option value="10">10</option>
+                                        <option value="15">15</option>
+                                        <option value="25">25</option>
+                                        <option value="40">40</option>
+                                        <option value="55">55</option>
+                                        <option value="55">55</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -35,12 +37,14 @@
                         </div>
                         <h1>{{"Posts"}}</h1>
                         <hr>
-                        @foreach($posts as $post)
+                        @forelse($posts as $post)
                             <h1> <a href="{{route('publicpost.show',$post->id)}}">{{$post->title}}</a> <div style="font-size:15px;display:inline-block;"> Created at: {{$post->created_at->format('Y-m-d')}} Last update: {{$post->updated_at->format('Y-m-d')}}</div></h1>
                             <h4> {{$post->category->category}}</h4>
                             {{str_limit($post->body,150)}}
                             <hr>
-                        @endforeach
+                        @empty
+                            {{"No data found"}}
+                        @endforelse
                         <div class="text-center">
                             {{ $posts->appends(request()->all())->links()}}
                         </div>

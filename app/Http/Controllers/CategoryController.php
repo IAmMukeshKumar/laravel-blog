@@ -25,12 +25,7 @@ class CategoryController extends Controller
             ->withCount('posts')
             ->paginate((int)$paginate);
 
-
-        if (!empty(auth()->user()->role)) {
             return view('categories.index', compact('categories'));
-        } else {
-            echo "You are not authorized for this action";
-        }
     }
 
 

@@ -29,7 +29,8 @@ class PostAdminController extends Controller
             })
             ->when($request->has('status'), function ($query) use ($request) {
                 return $query->where('status', '=', 1);
-            })->paginate((int)$paginate);
+            })->with('category')
+            ->paginate((int)$paginate);
         return view('posts.admin.index',compact('posts'));
     }
 
@@ -40,7 +41,7 @@ class PostAdminController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
+        $categories = Category::with('posts')->get();
         return view('posts.admin.create', compact('categories'));
     }
 
@@ -81,7 +82,7 @@ class PostAdminController extends Controller
      */
     public function edit($id)
     {
-        $categories = Category::all();
+        $categories = Category::with('posts')->get();
         $post = Post::findOrFail($id);
         return view('posts.admin.edit', ['post' => $post, 'categories' => $categories]);
 

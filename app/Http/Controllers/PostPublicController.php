@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use phpDocumentor\Reflection\Types\Integer;
 
 class PostPublicController extends Controller
 {
@@ -25,7 +26,7 @@ class PostPublicController extends Controller
         })
             ->when($request->has('status'), function ($query) use ($request) {
                 return $query->where('status', '=', 1);
-            })->paginate((int)$paginate);
+            })->with('category')->paginate((int)$paginate);
 
         return view('posts.public.index', compact('posts'));
     }
