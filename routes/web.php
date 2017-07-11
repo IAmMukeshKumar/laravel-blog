@@ -14,13 +14,13 @@
 
 
 Route::get('/','PostPublicController@index')->name('publicpost.index');
-Route::get('show/{id}','PostPublicController@show')->name('publicpost.show');
+Route::get('show/{post}/{slug?}','PostPublicController@show')->name('publicpost.show')->where(['id' => '[0-9]+']);;
 
 Auth::routes();
 
 Route::middleware('auth')->group(function()
 {
-    Route::resource('post', 'PostAdminController');
+    Route::resource('post','PostAdminController');
 
     Route::resource('category', 'CategoryController', [
         'except' => 'show'

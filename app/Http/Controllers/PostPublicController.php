@@ -37,10 +37,18 @@ class PostPublicController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post, $slug)
     {
-        $post = Post::findOrFail($id);
+        //$post = Post::findOrFail($id);
+
+        if ($slug !== str_slug($post->title)) {
+
+            return redirect(route('publicpost.show', ['id' => $post, 'slug' => str_slug($post->title)]),301);
+
+        }
+
         return view('posts.public.show', compact('post'));
+
     }
 
 }

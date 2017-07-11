@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Http\Requests\PostRequest;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Category;
+
 class PostAdminController extends Controller
 {
     /**
@@ -22,16 +24,16 @@ class PostAdminController extends Controller
         $paginate = $request->has('paginate') ? $request->input('paginate') : 5;
 
         $posts = Post::where(function ($query) use ($request) {
-                if ($request->has('title'))
-                    $query->where('title', 'like', '%' . $request->input('title') . '%');
-                if ($request->has('body'))
-                    $query->where('body', 'like', '%' . $request->input('body') . '%');
-            })
+            if ($request->has('title'))
+                $query->where('title', 'like', '%' . $request->input('title') . '%');
+            if ($request->has('body'))
+                $query->where('body', 'like', '%' . $request->input('body') . '%');
+        })
             ->when($request->has('status'), function ($query) use ($request) {
                 return $query->where('status', '=', 1);
             })->with('category')
             ->paginate((int)$paginate);
-        return view('posts.admin.index',compact('posts'));
+        return view('posts.admin.index', compact('posts'));
     }
 
     /**
@@ -116,6 +118,6 @@ class PostAdminController extends Controller
     {
         $post = Post::findOrFail($id);
         $post->delete();
-        return back()->with('success','One post deleted');
+        return back()->with('success', 'One post deleted');
     }
 }

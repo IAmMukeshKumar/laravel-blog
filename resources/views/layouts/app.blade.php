@@ -29,10 +29,10 @@
                     <span class="icon-bar"></span>
                 </button>
                 <!-- Branding Image -->
-                {{--<a class="navbar-brand" href="{{ url('/') }}">--}}
-                {{--{{ config('app.name', 'Laravel') }}--}}
-                {{--</a>--}}
-                <h3>Laravel Blog</h3>
+                <a class="navbar-brand" href="{{ url('/') }}">
+                {{ config('app.name', 'Laravel Blog') }}
+                </a>
+
             </div>
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
