@@ -17,8 +17,7 @@ class PostPublicController extends Controller
     {
         $paginate = $request->has('paginate') ? $request->input('paginate') : 5;
 
-        $posts = Post::
-        where(function ($query) use ($request) {
+        $posts = Post::where(function ($query) use ($request) {
             if ($request->has('title'))
                 $query->where('title', 'like', '%' . $request->input('title') . '%');
             if ($request->has('body'))
@@ -26,7 +25,7 @@ class PostPublicController extends Controller
         })
             ->when($request->has('status'), function ($query) use ($request) {
                 return $query->where('status', '=', 1);
-            })->with('category')->paginate((int)$paginate);
+            })->orderBy('created_at','desc')->with('category')->paginate((int)$paginate);
 
         return view('posts.public.index', compact('posts'));
     }
@@ -37,16 +36,15 @@ class PostPublicController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post, $slug)
+    public function show($id, $slug)
     {
-        //$post = Post::findOrFail($id);
+        $post = Post::findOrFail($id);
 
         if ($slug !== str_slug($post->title)) {
 
             return redirect(route('publicpost.show', ['id' => $post, 'slug' => str_slug($post->title)]),301);
 
         }
-
         return view('posts.public.show', compact('post'));
 
     }

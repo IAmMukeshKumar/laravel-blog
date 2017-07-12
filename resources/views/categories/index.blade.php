@@ -3,6 +3,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        <i class="glyphicon glyphicon-ok"></i> {{session('success')}}
+                    </div>
+                @endif
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="well">
@@ -47,9 +52,11 @@
                                               onsubmit="return confirm('Are you sure ?')" style="display:inline-block;">
                                             {{method_field('DELETE')}}
                                             {{csrf_field()}}
+                                            @if(!$category->posts_count)
                                             <button type="submit"
-                                                    class="btn btn-danger btn-xs" {{$category->posts_count ? "disabled":""}}>
+                                                    class="btn btn-danger btn-xs">
                                                 <i class="glyphicon glyphicon-trash"></i></button>
+                                                @endif
                                         </form>
                                     </td>
                                 </tr>
@@ -62,6 +69,9 @@
                                         class="glyphicon glyphicon-plus"></i> New category</a>
                             </tbody>
                         </table>
+                        <div class="text-center">
+                            {{ $categories->appends(request()->all())->links() }}
+                        </div>
                     </div>
                 </div>
             </div>

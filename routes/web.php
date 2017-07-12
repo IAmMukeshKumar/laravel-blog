@@ -11,13 +11,20 @@
 |
 */
 //
-
-
+/*
+ * Routing for public users'
+ */
 Route::get('/','PostPublicController@index')->name('publicpost.index');
 Route::get('show/{post}/{slug?}','PostPublicController@show')->name('publicpost.show')->where(['id' => '[0-9]+']);;
 
+/*
+ * Auth routing
+ */
 Auth::routes();
 
+/*
+ * Group resource controllers of categories and posts. Apply 'auth' middleware to
+ */
 Route::middleware('auth')->group(function()
 {
     Route::resource('post','PostAdminController');

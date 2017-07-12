@@ -3,12 +3,12 @@
     <div class="container">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        <i class="glyphicon glyphicon-ok"></i> {{session('success')}}
+                    </div>
+                @endif
                 <div class="panel panel-default">
-                    @if(session('success'))
-                        <div class="alert alert-success">
-                            <i class="glyphicon glyphicon-ok"></i>  {{session('success')}}
-                        </div>
-                    @endif
                     <div class="panel-heading">Add new category</div>
                     <div class="panel-body">
                         <form action="{{route('category.store')}}" method="post" id="add-category-form">
@@ -35,5 +35,5 @@
                 </div>
             </div>
         </div>
-
+    </div>
 @endsection

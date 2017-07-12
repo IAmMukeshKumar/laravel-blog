@@ -17,7 +17,7 @@
                             <div class="form-group @if($errors->has('title')) has-error @endif">
                                 <label> Title</label>
                                 <input type="text" class="form-control" placeholder="Title" name="title"
-                                       value="{{old('title',$post->title )}}">
+                                       value="{{old('title',title_case($post->title))}}">
                                 @if($errors->has('title'))
                                     <p class="help-block">{{$errors->first('title')}}</p>
                                 @endif

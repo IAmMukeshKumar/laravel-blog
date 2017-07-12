@@ -16,7 +16,7 @@
                                 <div class="form-group">
                                     <select class="form-control" name="paginate" value="{{request('paginate')}}">
                                         <option value="5">5</option>
-                                        <option value="10">2</option>
+                                        <option value="10">10</option>
                                         <option value="15">15</option>
                                         <option value="25">25</option>
                                         <option value="40">40</option>
@@ -57,7 +57,7 @@
                             <tbody>
                             @forelse($posts as $post)
                                 <tr>
-                                    <td>{{$post->title}}</td>
+                                    <td>{{str_limit($post->title,10)}}</td>
                                     <td> {{str_limit($post->body,30)}}</td>
                                     <td>{{$post->category->category}}</td>
                                     <td> {{$post->status?'Draft':'Public'}}</td>
@@ -70,8 +70,9 @@
                                             {{csrf_field()}}
                                             <button type="submit" class="btn btn-danger btn-xs">
                                                 <i class="glyphicon glyphicon-trash"></i></button>
-                                            <a class="btn btn-primary btn-xs"
-                                               href="{{route('post.show',$post->id)}}">Read</a>
+                                            {{--<a class="btn btn-primary btn-xs"--}}
+                                               {{--href="{{route('post.show',$post->id)}}">Read</a>--}}
+                                            <a  class="btn btn-primary btn-xs" href="{{route('publicpost.show',['id' => $post->id, 'slug' => str_slug($post->title)])}}">Read</a>
                                         </form>
                                     </td>
                                 </tr>

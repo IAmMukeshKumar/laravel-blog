@@ -15,7 +15,6 @@
                                         <option value="25">25</option>
                                         <option value="40">40</option>
                                         <option value="55">55</option>
-                                        <option value="55">55</option>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -38,9 +37,9 @@
                         <h1>{{"Posts"}}</h1>
                         <hr>
                         @forelse($posts as $post)
-                            <h1> <a href="{{route('publicpost.show',['id' => $post->id, 'slug' => str_slug($post->title)])}}">{{$post->title}}</a> <div style="font-size:15px;display:inline-block;"> Created at: {{$post->created_at->format('Y-m-d')}} Last update: {{$post->updated_at->format('Y-m-d')}}</div></h1>
+                            <h1> <a href="{{route('publicpost.show',['id' => $post->id, 'slug' => str_slug($post->title)])}}">{{title_case($post->title)}}</a> <div style="font-size:15px;display:inline-block;"> @if($post->created_at) Created at: {{$post->created_at->format('Y-m-d')}} @endif @if($post->updated_at)  Last update: {{$post->updated_at->format('Y-m-d')}} @endif</div></h1>
                             <h4> {{$post->category->category}}</h4>
-                            {{str_limit($post->body,150)}}
+                         {{str_limit($post->body,100)}}
                             <hr>
                         @empty
                             {{"No data found"}}

@@ -1,11 +1,13 @@
 @extends('layouts.app')
 @section('content')
+
     <div class="container">
         <div class="row">
+
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <h1>{{$post->title}}</h1>
+                        <h1>{{title_case($post->title)}}</h1>
                         <h4 style="font-style:italic;display:inline-block;">{{$post->category->category}}</h4>
                         <p>
                             @if($post->created_at)
@@ -13,7 +15,8 @@
                             @endif
                         </p>
                         <hr>
-                        <p> {{$post->body}}</p>
+                        <p style="word-break: keep-all;overflow: scroll;white-space: pre"> {{ $post->body }}</p>
+                        {{--@lang($post->body)--}}
                     </div>
                 </div>
             </div>

@@ -31,7 +31,7 @@ class PostAdminController extends Controller
         })
             ->when($request->has('status'), function ($query) use ($request) {
                 return $query->where('status', '=', 1);
-            })->with('category')
+            })->orderBy('created_at','desc')->with('category')
             ->paginate((int)$paginate);
         return view('posts.admin.index', compact('posts'));
     }

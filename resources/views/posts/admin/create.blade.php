@@ -3,12 +3,12 @@
     <div class="container">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
-                <div class="panel panel-default">
-                    @if(session('success'))
+                @if(session('success'))
                         <div class="alert alert-success">
                             <i class="glyphicon glyphicon-ok"></i> {{session('success')}}
                         </div>
                     @endif
+                        <div class="panel panel-default">
                     <div class="panel-heading">New Post</div>
                     <div class="panel-body">
                         <form action="{{route('post.store')}}" method="post" id="update-task-form">
