@@ -25,6 +25,9 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 
 });
 
+/*
+ * Factory to make category
+ */
 $factory->define(App\Category::class, function (Faker\Generator $faker) {
 
     return [
@@ -34,6 +37,9 @@ $factory->define(App\Category::class, function (Faker\Generator $faker) {
 
 });
 
+/*
+ * Factory to make posts and relate them to a random category available
+ */
 $factory->define(App\Post::class, function (Faker\Generator $faker) {
 
     return [

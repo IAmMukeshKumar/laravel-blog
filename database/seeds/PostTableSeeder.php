@@ -7,6 +7,7 @@ class PostTableSeeder extends Seeder
     /**
      * Run the database seeds.
      *
+     *Call Post seeder
      * @return void
      */
     public function run()

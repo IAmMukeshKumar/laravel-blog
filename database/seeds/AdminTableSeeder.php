@@ -8,11 +8,11 @@ class AdminTableSeeder extends Seeder
      * Run the database seeds.
      *
      * @return void
+     *
+     * seed Admin
      */
     public function run()
     {
-        //Seed Admin
-
         DB::table('users')->insert([
             'name' => 'mukesh',
             'email' => 'william.mukesh@ithands.biz',

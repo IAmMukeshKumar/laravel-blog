@@ -6,13 +6,11 @@ class DatabaseSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
+     * Call seeder classes
      * @return void
      */
     public function run()
     {
-
-        //Call TableSeeder classes
         $this->call(AdminTableSeeder::class);
         $this->call(CategoryTableSeeder::class);
         $this->call(PostTableSeeder::class);

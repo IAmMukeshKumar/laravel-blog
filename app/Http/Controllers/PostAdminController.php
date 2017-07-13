@@ -19,6 +19,9 @@ class PostAdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    /*
+     * Display search result.
+     */
     public function index(Request $request)
     {
         $paginate = $request->has('paginate') ? $request->input('paginate') : 5;
@@ -70,11 +73,14 @@ class PostAdminController extends Controller
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        $post = Post::findOrFail($id);
-        return view('posts.admin.show', compact('post'));
-    }
+    /*
+     * Function not in use
+     */
+//    public function show($id)
+//    {
+//        $post = Post::findOrFail($id);
+//        return view('posts.admin.show', compact('post'));
+//    }
 
     /**
      * Show the form for editing the specified resource.

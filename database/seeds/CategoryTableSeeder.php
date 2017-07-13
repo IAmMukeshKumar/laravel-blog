@@ -7,6 +7,7 @@ class CategoryTableSeeder extends Seeder
     /**
      * Run the database seeds.
      *
+     * seed Category
      * @return void
      */
     public function run()
