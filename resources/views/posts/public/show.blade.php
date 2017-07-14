@@ -7,7 +7,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <h1>{{title_case($post->title)}}</h1>
+                        <h1>{{($post->title)}}</h1>
                         <h4 style="font-style:italic;display:inline-block;">{{$post->category->category}}</h4>
                         <p>
                             @if($post->created_at)
@@ -22,4 +22,6 @@
             </div>
         </div>
     </div>
+    @include('comments.create')
+    @include('comments.show')
 @endsection

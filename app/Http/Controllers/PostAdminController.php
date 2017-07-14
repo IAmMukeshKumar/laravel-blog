@@ -34,7 +34,7 @@ class PostAdminController extends Controller
         })
             ->when($request->has('status'), function ($query) use ($request) {
                 return $query->where('status', '=', 1);
-            })->orderBy('created_at','desc')->with('category')
+            })->orderBy('created_at', 'desc')->with('category')
             ->paginate((int)$paginate);
         return view('posts.admin.index', compact('posts'));
     }
@@ -59,28 +59,13 @@ class PostAdminController extends Controller
     public function store(PostRequest $request)
     {
         $post = new Post;
-        $post->title = $request->title;
+        $post->title = title_case($request->title);
         $post->body = $request->body;
         $post->category_id = $request->category;
         $post->status = $request->status;
         $post->save();
         return back()->with('success', 'Post saved');
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    /*
-     * Function not in use
-     */
-//    public function show($id)
-//    {
-//        $post = Post::findOrFail($id);
-//        return view('posts.admin.show', compact('post'));
-//    }
 
     /**
      * Show the form for editing the specified resource.

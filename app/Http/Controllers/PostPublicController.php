@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use App\Comment;
 use phpDocumentor\Reflection\Types\Integer;
 
 class PostPublicController extends Controller
@@ -25,7 +26,7 @@ class PostPublicController extends Controller
         })
             ->when($request->has('status'), function ($query) use ($request) {
                 return $query->where('status', '=', 1);
-            })->orderBy('created_at','desc')->with('category')->paginate((int)$paginate);
+            })->orderBy('created_at', 'desc')->with('category')->paginate((int)$paginate);
 
         return view('posts.public.index', compact('posts'));
     }
@@ -42,10 +43,12 @@ class PostPublicController extends Controller
 
         if ($slug !== str_slug($post->title)) {
 
-            return redirect(route('publicpost.show', ['id' => $post, 'slug' => str_slug($post->title)]),301);
-
+            return redirect(route('publicpost.show', ['id' => $post, 'slug' => str_slug($post->title)]), 301);
         }
-        return view('posts.public.show', compact('post'));
+
+        $comments = $post->comments;
+
+        return view('posts.public.show', ['post' => $post, 'comments' => $comments]);
 
     }
 

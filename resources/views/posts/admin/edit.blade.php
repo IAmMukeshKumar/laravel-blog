@@ -1,27 +1,34 @@
 @extends('layouts.app')
+
+{{--Edit Post--}}
 @section('content')
     <div class="container">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
+
+                {{--Edition message--}}
                 @if(session('success'))
                     <div class="alert alert-success">
                         <i class="glyphicon glyphicon-ok"></i> {{session('success')}}
                     </div>
                 @endif
+
                 <div class="panel panel-default">
                     <div class="panel-heading">Update Post</div>
                     <div class="panel-body">
                         <form action="{{route('post.update',$post->id)}}" method="post" id="update-task-form">
                             {{method_field('PATCH')}}
                             {{csrf_field()}}
+
                             <div class="form-group @if($errors->has('title')) has-error @endif">
                                 <label> Title</label>
                                 <input type="text" class="form-control" placeholder="Title" name="title"
-                                       value="{{old('title',title_case($post->title))}}">
+                                       value="{{old('title',$post->title)}}">
                                 @if($errors->has('title'))
                                     <p class="help-block">{{$errors->first('title')}}</p>
                                 @endif
                             </div>
+
                             <div class="form-group @if($errors->has('body')) has-error @endif">
                                 <label>Body</label>
                                 <textarea class="form-control" rows="10" placeholder="Write something"
@@ -30,8 +37,10 @@
                                     <p class="help-block">{{$errors->first('body')}}</p>
                                 @endif
                             </div>
+
                             <div class="form-group @if($errors->has('category')) has-error @endif">
                                 {{"Category : "}}
+
                                 <select name="category">
                                     <option value="{{$post->category->id}}">{{$post->category->category}}</option>
                                     @foreach($categories as $category)
@@ -40,10 +49,12 @@
                                         @endif
                                     @endforeach
                                 </select>
+
                                 @if($errors->has('category'))
                                     <p class="help-block">{{$errors->first('category')}}</p>
                                 @endif
                             </div>
+
                             <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
                                 <label for="status" class="col-md-4 control-label">status</label>
                                 Draft:
@@ -58,6 +69,7 @@
                                     </span>
                                 @endif
                             </div>
+
                             <button type="submit" class="btn btn-primary">Update</button>
                         </form>
                     </div>

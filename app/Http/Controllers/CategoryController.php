@@ -18,14 +18,14 @@ class CategoryController extends Controller
         $paginate = $request->has('paginate') ? $request->input('paginate') : 5;
 
         $categories = Category::
-            where(function ($query) use ($request) {
-                if ($request->has('category'))
-                    $query->where('category', 'like', '%' . $request->input('category') . '%');
-            })
+        where(function ($query) use ($request) {
+            if ($request->has('category'))
+                $query->where('category', 'like', '%' . $request->input('category') . '%');
+        })
             ->withCount('posts')
             ->paginate((int)$paginate);
 
-            return view('categories.index', compact('categories'));
+        return view('categories.index', compact('categories'));
     }
 
 
@@ -49,7 +49,7 @@ class CategoryController extends Controller
     {
         $category = new Category;
         $category->category = $request->category;
-        $category->description=$request->description;
+        $category->description = $request->description;
         $category->save();
         return back()->with('success', 'Category added');
     }
@@ -94,6 +94,6 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
         $category->delete();
 
-        return back()->with('success','Category was deleted.');
+        return back()->with('success', 'Category was deleted.');
     }
 }

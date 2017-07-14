@@ -21,4 +21,12 @@ class Post extends Model
         return $this->belongsTo('App\Category');
     }
 
+  /*
+   * One post may have many comments
+   */
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
+
 }
