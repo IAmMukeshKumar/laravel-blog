@@ -31,11 +31,10 @@ class PostAdminController extends Controller
                 $query->where('title', 'like', '%' . $request->input('title') . '%');
             if ($request->has('body'))
                 $query->where('body', 'like', '%' . $request->input('body') . '%');
-        })
-            ->when($request->has('status'), function ($query) use ($request) {
-                return $query->where('status', '=', 1);
-            })->orderBy('created_at', 'desc')->with('category')
-            ->paginate((int)$paginate);
+        })->when($request->has('status'), function ($query) use ($request) {
+            return $query->where('status', '=', 1);
+        })->with('category')->withCount('comments')->orderBy('comments_count', 'desc')->paginate((int)$paginate);
+
         return view('posts.admin.index', compact('posts'));
     }
 
@@ -47,6 +46,7 @@ class PostAdminController extends Controller
     public function create()
     {
         $categories = Category::with('posts')->get();
+
         return view('posts.admin.create', compact('categories'));
     }
 
@@ -64,6 +64,7 @@ class PostAdminController extends Controller
         $post->category_id = $request->category;
         $post->status = $request->status;
         $post->save();
+
         return back()->with('success', 'Post saved');
     }
 
@@ -77,6 +78,7 @@ class PostAdminController extends Controller
     {
         $categories = Category::with('posts')->get();
         $post = Post::findOrFail($id);
+
         return view('posts.admin.edit', ['post' => $post, 'categories' => $categories]);
 
     }
@@ -96,6 +98,7 @@ class PostAdminController extends Controller
         $post->category_id = $request->category;
         $post->status = $request->status;
         $post->save();
+
         return back()->with('success', 'Updated');
     }
 
@@ -109,6 +112,7 @@ class PostAdminController extends Controller
     {
         $post = Post::findOrFail($id);
         $post->delete();
+
         return back()->with('success', 'One post deleted');
     }
 }

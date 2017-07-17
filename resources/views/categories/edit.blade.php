@@ -9,14 +9,15 @@
                 {{--Show edition status--}}
                 @if(session('success'))
                     <div class="alert alert-success">
-                        <i class="glyphicon glyphicon-ok"></i>   {{session('success')}}
+                        <i class="glyphicon glyphicon-ok"></i> {{session('success')}}
                     </div>
                 @endif
 
                 <div class="panel panel-default">
                     <div class="panel-heading">Update category</div>
                     <div class="panel-body">
-                        <form action="{{route('category.update',$category->id)}}" method="post" id="update-category-form">
+                        <form action="{{route('category.update',$category->id)}}" method="post"
+                              id="update-category-form">
                             {{method_field('PATCH')}}
                             {{csrf_field()}}
 

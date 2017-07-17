@@ -29,7 +29,6 @@
                                         <option value="40">40</option>
                                         <option value="55">55</option>
                                     </select>
-
                                 </div>
 
                                 {{--Input search by title--}}
@@ -63,11 +62,12 @@
                             <thead>
                             <tr>
                                 <div class="text-center">
-                                <th>Title</th>
-                                <th>Body</th>
-                                <th>Category</th>
-                                <th>Status</th>
-                                <th>Actions</th>
+                                    <th>Title</th>
+                                    <th>Body</th>
+                                    <th>Category</th>
+                                    <th>Status</th>
+                                    <th>Comments</th>
+                                    <th>Actions</th>
                                 </div>
                             </tr>
                             </thead>
@@ -78,6 +78,7 @@
                                     <td> {{str_limit($post->body,30)}}</td>
                                     <td>{{$post->category->category}}</td>
                                     <td> {{$post->status?'Draft':'Public'}}</td>
+                                    <td>{{$post->comments_count}}</td>
                                     <td>
                                         <a class="btn btn-primary btn-xs" href="{{route('post.edit',$post->id)}}"><i
                                                     class="glyphicon glyphicon-pencil"></i></a>
@@ -87,17 +88,19 @@
                                             {{csrf_field()}}
                                             <button type="submit" class="btn btn-danger btn-xs">
                                                 <i class="glyphicon glyphicon-trash"></i></button>
-                                            <a  class="btn btn-primary btn-xs" href="{{route('publicpost.show',['id' => $post->id, 'slug' => str_slug($post->title)])}}">Read</a>
+                                            <a class="btn btn-primary btn-xs"
+                                               href="{{route('publicpost.show',['id' => $post->id, 'slug' => str_slug($post->title)])}}">Read</a>
                                         </form>
                                     </td>
                                 </tr>
-                           @empty
+                            @empty
                                 <div class="text-center">
-                               {{"No data found"}}
+                                    {{"No data found"}}
                                 </div>
-                                @endforelse
+                            @endforelse
                             </tbody>
                         </table>
+
                         <div class="text-center">
                             {{ $posts->appends(request()->all())->links() }}
                         </div>

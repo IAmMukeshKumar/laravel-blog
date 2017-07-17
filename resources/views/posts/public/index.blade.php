@@ -44,9 +44,17 @@
 
                         {{--Show post result--}}
                         @forelse($posts as $post)
-                            <h1> <a href="{{route('publicpost.show',['id' => $post->id, 'slug' => str_slug($post->title)])}}">{{title_case($post->title)}}</a> <div style="font-size:15px;display:inline-block;"> @if($post->created_at) Created at: {{$post->created_at->format('Y-m-d')}} @endif @if($post->updated_at)  Last update: {{$post->updated_at->format('Y-m-d')}} @endif</div></h1>
-                            <h4> {{$post->category->category}}</h4>
-                         {{str_limit($post->body,100)}}
+                            <article>
+                                <h2>
+                                    <a href="{{route('publicpost.show',['id' => $post->id, 'slug' => str_slug($post->title)])}}">{{title_case($post->title)}}</a>
+                                </h2>
+                                <p>
+                                    <br><i class="glyphicon glyphicon-calendar"></i>
+                                    <time title="{{$post->created_at->toDateTimeString()}}">{{$post->created_at->diffForHumans()}}</time> in <i class="glyphicon glyphicon-folder-open"> </i>&ensp;{{$post->category->category}} </p>
+                                <p>
+                                    {{str_limit($post->body,200)}}
+                                </p>
+                            </article>
                             <hr>
                         @empty
                             {{"No data found"}}

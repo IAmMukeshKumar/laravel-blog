@@ -18,15 +18,14 @@ class PostPublicController extends Controller
     {
         $paginate = $request->has('paginate') ? $request->input('paginate') : 5;
 
-        $posts = Post::where(function ($query) use ($request) {
+        $posts = Post::where('status',0)->where(function ($query) use ($request) {
             if ($request->has('title'))
                 $query->where('title', 'like', '%' . $request->input('title') . '%');
             if ($request->has('body'))
                 $query->where('body', 'like', '%' . $request->input('body') . '%');
-        })
-            ->when($request->has('status'), function ($query) use ($request) {
-                return $query->where('status', '=', 1);
-            })->orderBy('created_at', 'desc')->with('category')->paginate((int)$paginate);
+        })->when($request->has('status'), function ($query) use ($request) {
+            return $query;
+        })->orderBy('created_at', 'desc')->with('category')->paginate((int)$paginate);
 
         return view('posts.public.index', compact('posts'));
     }

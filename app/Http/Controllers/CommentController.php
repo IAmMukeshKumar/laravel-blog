@@ -10,16 +10,14 @@ use App\Guest;
 
 class CommentController extends Controller
 {
-
-
     public function store(CommentRequest $request, $postId)
     {
-       Post::findOrfail($postId);
+        Post::findOrfail($postId);
 
-       //Store guest
+        //Store guest
         $guest = new Guest;
         $guest->email = $request->email;
-        $guest->name=$request->name;
+        $guest->name = $request->name;
         $guest->save();
 
         // Store comment
@@ -30,8 +28,7 @@ class CommentController extends Controller
         $comment->body = $request->comment;
         $comment->save();
 
-        return back()->with('success', 'Your comment has been posted');
+        return back()->with('success', 'Your comment has been send for approval');
 
     }
-
 }

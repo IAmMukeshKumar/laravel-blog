@@ -65,10 +65,10 @@
                                             {{method_field('DELETE')}}
                                             {{csrf_field()}}
                                             @if(!$category->posts_count)
-                                            <button type="submit"
-                                                    class="btn btn-danger btn-xs">
-                                                <i class="glyphicon glyphicon-trash"></i></button>
-                                                @endif
+                                                <button type="submit"
+                                                        class="btn btn-danger btn-xs">
+                                                    <i class="glyphicon glyphicon-trash"></i></button>
+                                            @endif
                                         </form>
                                     </td>
                                 </tr>
