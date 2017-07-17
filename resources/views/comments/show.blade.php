@@ -32,8 +32,8 @@
                                 {{csrf_field()}}
                                 <div class="form-group text-right col-sm-12">
                                     <button type="submit" class="btn btn-primary btn-xs"
-                                            @if($comment->status) disabled @endif >
-                                        @if($comment->status) Approved @else Approve @endif</button>
+                                            {{--@if($comment->status) disabled @endif--}}>
+                                        @if($comment->status) Disapprove @else Approve @endif</button>
                                 </div>
                             </form>
 

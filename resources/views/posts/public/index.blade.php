@@ -50,7 +50,10 @@
                                 </h2>
                                 <p>
                                     <br><i class="glyphicon glyphicon-calendar"></i>
-                                    <time title="{{$post->created_at->toDateTimeString()}}">{{$post->created_at->diffForHumans()}}</time> in <i class="glyphicon glyphicon-folder-open"> </i>&ensp;{{$post->category->category}} </p>
+                                    <time title="{{$post->created_at->toDateTimeString()}}">{{$post->created_at->diffForHumans()}}</time>
+                                    in
+                                    <i class="glyphicon glyphicon-folder-open"> </i>&ensp;{{$post->category->category}}
+                                </p>
                                 <p>
                                     {{str_limit($post->body,200)}}
                                 </p>

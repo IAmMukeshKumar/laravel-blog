@@ -11,10 +11,10 @@ class ApproveCommentController extends Controller
     public function approve($id)
     {
         $comment = Comment::findOrFail($id);
-        $comment->status = 1;
+        $comment->status = $comment->status ? 0 : 1;
         $comment->update();
 
-        return back()->with('success', 'Comment approved');
+        return back()->with('success', 'Comment status changed');
 
     }
 
