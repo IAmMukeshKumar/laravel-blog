@@ -7,11 +7,7 @@
             <div class="col-md-10 col-md-offset-1">
 
                 {{--Show edition status--}}
-                @if(session('success'))
-                    <div class="alert alert-success">
-                        <i class="glyphicon glyphicon-ok"></i> {{session('success')}}
-                    </div>
-                @endif
+                @include('messages.successMessage')
 
                 <div class="panel panel-default">
                     <div class="panel-heading">Update category</div>
@@ -40,7 +36,7 @@
                                     <p class="help-block">{{$errors->first('description')}}</p>
                                 @endif
                             </div>
-
+                            <input class="btn btn" type="reset" value="Reset">
                             <button type="submit" class="btn btn-primary">Update</button>
                         </form>
                     </div>

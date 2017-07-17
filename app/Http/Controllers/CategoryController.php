@@ -49,7 +49,7 @@ class CategoryController extends Controller
         $category->description = $request->description;
         $category->save();
 
-        return back()->with('success', 'Category added');
+        return back()->with('success', 'Category was added successfully');
     }
 
 
@@ -79,7 +79,7 @@ class CategoryController extends Controller
         $category->category = $request->category;
         $category->save();
 
-        return back()->with('success', 'Category updated');
+        return back()->with('success', 'Category was updated successfully');
     }
 
     /**
@@ -93,6 +93,6 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
         $category->delete();
 
-        return back()->with('success', 'Category was deleted.');
+        return back()->with('success', 'Category was deleted');
     }
 }

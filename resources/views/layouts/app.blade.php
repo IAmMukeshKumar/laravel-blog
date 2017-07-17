@@ -28,6 +28,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel Blog') }}
@@ -35,16 +36,18 @@
 
             </div>
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
+
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     &nbsp;
                 </ul>
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
+
                     <!-- Authentication Links -->
                     @if (Auth::guest())
                         <li><a href="{{ route('login') }}">Login</a></li>
-                        {{--<li><a href="{{ route('register') }}">Register</a></li>--}}
+                        <li><a href="{{ route('register') }}">Register</a></li>
                     @else
                         <li><a href="{{route('category.index')}}">Category</a></li>
                         <li><a href="{{route('post.index')}}"><i class="glyphicon glyphicon-th-list"></i>Posts</a></li>

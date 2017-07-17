@@ -33,7 +33,7 @@ class PostAdminController extends Controller
                 $query->where('body', 'like', '%' . $request->input('body') . '%');
         })->when($request->has('status'), function ($query) use ($request) {
             return $query->where('status', '=', 1);
-        })->with('category')->withCount('comments')->orderBy('comments_count', 'desc')->paginate((int)$paginate);
+        })->with('category')->withCount('comments')->latest()->paginate((int)$paginate);
 
         return view('posts.admin.index', compact('posts'));
     }
@@ -58,6 +58,8 @@ class PostAdminController extends Controller
      */
     public function store(PostRequest $request)
     {
+        Category::findOrFail($request->category);
+
         $post = new Post;
         $post->title = title_case($request->title);
         $post->body = $request->body;
@@ -99,7 +101,7 @@ class PostAdminController extends Controller
         $post->status = $request->status;
         $post->save();
 
-        return back()->with('success', 'Updated');
+        return back()->with('success', 'Your was updated successfully');
     }
 
     /**
@@ -113,6 +115,6 @@ class PostAdminController extends Controller
         $post = Post::findOrFail($id);
         $post->delete();
 
-        return back()->with('success', 'One post deleted');
+        return back()->with('success', 'One post was deleted');
     }
 }

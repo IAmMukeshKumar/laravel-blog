@@ -7,11 +7,7 @@
             <div class="col-md-10 col-md-offset-1">
 
                 {{--Show creation message--}}
-                @if(session('success'))
-                    <div class="alert alert-success">
-                        <i class="glyphicon glyphicon-ok"></i> {{session('success')}}
-                    </div>
-                @endif
+                @include('messages.successMessage')
 
                 <div class="panel panel-default">
                     <div class="panel-heading">New Post</div>

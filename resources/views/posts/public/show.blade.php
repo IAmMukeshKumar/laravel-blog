@@ -5,11 +5,9 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                @if(session('success'))
-                    <div class="alert alert-success">
-                        <i class="glyphicon glyphicon-ok"></i> {{session('success')}}
-                    </div>
-                @endif
+
+                @include('messages.successMessage')
+
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <h1>{{($post->title)}}</h1>

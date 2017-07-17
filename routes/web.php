@@ -12,20 +12,17 @@
 */
 //
 
-/*
- * Routing for public users'
- */
+
+//Routing for public users'
 Route::get('/', 'PostPublicController@index')->name('publicpost.index');
 Route::get('show/{id}/{slug?}', 'PostPublicController@show')->name('publicpost.show')->where(['id' => '[0-9]+']);;
 
-/*
- * Auth routing
- */
+
+//  Auth routing
 Auth::routes();
 
-/*
- * Group resource controllers of categories and posts. Apply 'auth' middleware to them
- */
+
+//Group resource controllers of categories and posts. Apply 'auth' middleware to them
 Route::middleware('auth')->group(function () {
     Route::resource('post', 'PostAdminController');
 
@@ -38,10 +35,7 @@ Route::middleware('auth')->group(function () {
 
 });
 
-/*
- * Comments route
- */
-
+// Comments route
 Route::post('post/{post}/comment', 'CommentController@store')->name('comment.store');
 
 

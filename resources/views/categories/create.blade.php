@@ -7,11 +7,7 @@
             <div class="col-md-10 col-md-offset-1">
 
                 {{--Show new category creation message--}}
-                @if(session('success'))
-                    <div class="alert alert-success">
-                        <i class="glyphicon glyphicon-ok"></i> {{session('success')}}
-                    </div>
-                @endif
+                @include('messages.successMessage')
 
                 <div class="panel panel-default">
                     <div class="panel-heading">Add new category</div>
@@ -38,7 +34,7 @@
                                     <p class="help-block">{{$errors->first('description')}}</p>
                                 @endif
                             </div>
-
+                            <button type="reset" class="btn btn-outline-primary">RESET</button>
                             <button type="submit" class="btn btn-primary">Add</button>
                         </form>
                     </div>

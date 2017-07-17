@@ -14,7 +14,7 @@ class ApproveCommentController extends Controller
         $comment->status = $comment->status ? 0 : 1;
         $comment->update();
 
-        return back()->with('success', 'Comment status changed');
+        return back()->with('success', 'Comment status was changed');
 
     }
 
@@ -24,6 +24,6 @@ class ApproveCommentController extends Controller
         $comment = Comment::findOrFail($id);
         $comment->delete();
 
-        return back()->with('success', 'Comment deleted');
+        return back()->with('success', 'Comment was deleted');
     }
 }

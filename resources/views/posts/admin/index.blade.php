@@ -7,11 +7,7 @@
             <div class="col-md-8 col-md-offset-2">
 
                 {{--Post Deletion message--}}
-                @if(session('success'))
-                    <div class="alert alert-success">
-                        <i class="glyphicon glyphicon-ok"></i> {{session('success')}}
-                    </div>
-                @endif
+                @include('messages.successMessage')
 
                 <div class="panel panel-default">
                     <h3 class="panel-heading">{{"Posts"}}</h3>

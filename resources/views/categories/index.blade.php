@@ -7,11 +7,7 @@
             <div class="col-md-8 col-md-offset-2">
 
                 {{--Show deletion message --}}
-                @if(session('success'))
-                    <div class="alert alert-success">
-                        <i class="glyphicon glyphicon-ok"></i> {{session('success')}}
-                    </div>
-                @endif
+                @include('messages.successMessage')
 
                 <div class="panel panel-default">
                     <div class="panel-body">
@@ -47,6 +43,7 @@
                             <thead>
                             <tr>
                                 <th>Title</th>
+                                <th>Description</th>
                                 <th>Posts</th>
                                 <th>Actions</th>
                             </tr>
@@ -55,6 +52,7 @@
                             @forelse($categories as $category)
                                 <tr>
                                     <td>{{$category->category}}</td>
+                                    <td>{{$category->description}}</td>
                                     <td>{{$category->posts_count}}</td>
                                     <td>
                                         <a class="btn btn-primary btn-xs"

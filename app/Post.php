@@ -12,14 +12,12 @@ class Post extends Model
      *
      * @var array
      */
-
     protected $guarded = [
         'id', 'created_at', 'updated_at', 'deleted_at'
     ];
 
 
      //One category may belong to many posts.
-
     public function category()
     {
         return $this->belongsTo('App\Category');
@@ -27,7 +25,6 @@ class Post extends Model
 
 
      // One post may have many comments
-
     public function comments()
     {
         return $this->hasMany('App\Comment');
