@@ -56,16 +56,16 @@
                         {{--Post(s) table--}}
                         <table class="table table-hover">
                             <thead>
-                            <tr>
-                                <div class="text-center">
+                            <div class="text-center">
+                                <tr>
                                     <th>Title</th>
                                     <th>Body</th>
                                     <th>Category</th>
                                     <th>Status</th>
                                     <th>Comments</th>
                                     <th>Actions</th>
-                                </div>
-                            </tr>
+                                </tr>
+                            </div>
                             </thead>
                             <tbody>
                             @forelse($posts as $post)
