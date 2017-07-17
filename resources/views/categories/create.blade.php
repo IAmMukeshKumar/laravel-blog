@@ -34,7 +34,7 @@
                                     <p class="help-block">{{$errors->first('description')}}</p>
                                 @endif
                             </div>
-                            <button type="reset" class="btn btn-outline-primary">RESET</button>
+                            <button type="reset" class="btn btn-outline-primary">Reset</button>
                             <button type="submit" class="btn btn-primary">Add</button>
                         </form>
                     </div>

@@ -37,6 +37,7 @@
                                 @endif
                             </div>
                             <input class="btn btn" type="reset" value="Reset">
+                            <button type="reset" class="btn btn-outline-primary">RESET</button>
                             <button type="submit" class="btn btn-primary">Update</button>
                         </form>
                     </div>

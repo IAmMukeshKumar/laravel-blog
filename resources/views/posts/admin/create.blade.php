@@ -67,7 +67,7 @@
                                     </span>
                                 @endif
                             </div>
-
+                            <button type="reset" class="btn btn-outline-primary">RESET</button>
                             <button type="submit" class="btn btn-primary">Save</button>
                         </form>
 

@@ -45,6 +45,7 @@
                         </div>
 
                         <div class="form-group text-right col-sm-12">
+                            <button type="reset" class="btn btn-outline-primary">RESET</button>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
 
