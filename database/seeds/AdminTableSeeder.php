@@ -17,11 +17,10 @@ class AdminTableSeeder extends Seeder
             'name' => 'mukesh',
             'email' => 'william.mukesh@ithands.biz',
             'password' => bcrypt('password'),
-            'role' => 1,
-
+            'is_admin' => 1,
         ]);
 
-        //factory(App\User::class, 10)->create();
+       factory(App\User::class, 10)->create();
 
     }
 }

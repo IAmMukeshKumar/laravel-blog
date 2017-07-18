@@ -45,7 +45,7 @@
                                 <th>Title</th>
                                 <th>Description</th>
                                 <th>Posts</th>
-                                <th>Actions</th>
+                               @if(auth()->user()->is_admin) <th>Actions</th>@endif
                             </tr>
                             </thead>
                             <tbody>
@@ -54,7 +54,7 @@
                                     <td>{{$category->category}}</td>
                                     <td>{{$category->description}}</td>
                                     <td>{{$category->posts_count}}</td>
-                                    <td>
+                                    @if(auth()->user()->is_admin) <td>
                                         <a class="btn btn-primary btn-xs"
                                            href="{{route('category.edit',$category->id)}}"><i
                                                     class="glyphicon glyphicon-pencil"></i></a>
@@ -68,7 +68,7 @@
                                                     <i class="glyphicon glyphicon-trash"></i></button>
                                             @endif
                                         </form>
-                                    </td>
+                                    </td>@endif
                                 </tr>
                             @empty
                                 <div class="text-center">

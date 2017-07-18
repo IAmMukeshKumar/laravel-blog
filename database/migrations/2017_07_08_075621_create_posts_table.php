@@ -20,7 +20,9 @@ class CreatePostsTable extends Migration
             $table->longText('body');
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->boolean('status');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->boolean('status')->default(0);
             $table->timestamps();
         });
     }

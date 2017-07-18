@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CategoryRequest;
 use Illuminate\Http\Request;
 use App\Category;
+use App\User;
 
 class CategoryController extends Controller
 {
@@ -20,7 +21,7 @@ class CategoryController extends Controller
         $categories = Category::where(function ($query) use ($request) {
             if ($request->has('category'))
                 $query->where('category', 'like', '%' . $request->input('category') . '%');
-        })->withCount('posts')->paginate((int)$paginate);
+        })->withCount('posts')->orderBy('category')->paginate((int)$paginate);
 
         return view('categories.index', compact('categories'));
     }
@@ -33,6 +34,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
+        User::findOrFail(auth()->user()->is_admin);
         return view('categories.create');
     }
 
@@ -44,12 +46,14 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        $category = new Category;
-        $category->category = $request->category;
-        $category->description = $request->description;
-        $category->save();
+            User::findOrFail(auth()->user()->is_admin);
+            $category = new Category;
+            $category->category = $request->category;
+            $category->description = $request->description;
+            $category->save();
 
-        return back()->with('success', 'Category was added successfully');
+            return back()->with('success', 'Category was added successfully');
+
     }
 
 
@@ -61,6 +65,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
+        User::findOrFail(auth()->user()->is_admin);
         $category = Category::findOrFail($id);
 
         return view('categories.edit', compact('category'));
@@ -75,6 +80,7 @@ class CategoryController extends Controller
      */
     public function update(CategoryRequest $request, $id)
     {
+        User::findOrFail(auth()->user()->is_admin);
         $category = Category::findOrFail($id);
         $category->category = $request->category;
         $category->save();
@@ -90,6 +96,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
+        User::findOrFail(auth()->user()->is_admin);
         $category = Category::findOrFail($id);
         $category->delete();
 

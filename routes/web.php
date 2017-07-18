@@ -26,12 +26,14 @@ Auth::routes();
 Route::middleware('auth')->group(function () {
     Route::resource('post', 'PostAdminController');
 
-    Route::resource('category', 'CategoryController', [
-        'except' => 'show'
-    ]);
+        Route::resource('category', 'CategoryController', [
+            'except' => 'show'
+        ]);
+
 
     Route::get('approve/{comment}','ApproveCommentController@approve')->name('comment.approve');
     Route::get('delete/{comment}','ApproveCommentController@delete')->name('comment.delete');
+    Route::get('Post/{post}','ApprovePostController@approve')->name('post.approve');
 
 });
 

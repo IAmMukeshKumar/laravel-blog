@@ -39,25 +39,6 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="form-group{{ $errors->has('role') ? ' has-error' : '' }}">
-                                <label for="email" class="col-md-4 control-label">Role</label>
-
-                                <div class="col-md-6">
-                                    Admin:
-                                    <input type="radio" name="role" id="optionsRadios1" value=1
-                                           @if(old('role')==1) checked @endif disabled>
-                                    Public:
-                                    <input type="radio" name="role" id="optionsRadios0" value=0
-                                           @if(old('role')==0) checked @endif>
-
-
-                                    @if ($errors->has('role'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('role') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
 
                             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                                 <label for="password" class="col-md-4 control-label">Password</label>

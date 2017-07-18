@@ -53,6 +53,7 @@
                                 @endif
                             </div>
 
+                            @if(auth()->user()->is_admin)
                             <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
                                 <label for="status" class="col-md-4 control-label">status</label>
                                 Draft:
@@ -67,6 +68,8 @@
                                     </span>
                                 @endif
                             </div>
+
+                            @endif
                             <button type="reset" class="btn btn-outline-primary">RESET</button>
                             <button type="submit" class="btn btn-primary">Update</button>
                         </form>

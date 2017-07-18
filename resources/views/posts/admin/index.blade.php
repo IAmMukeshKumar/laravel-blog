@@ -4,7 +4,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-9 col-md-offset-2">
 
                 {{--Post Deletion message--}}
                 @include('messages.successMessage')
@@ -73,10 +73,26 @@
                                     <td>{{str_limit($post->title,10)}}</td>
                                     <td> {{str_limit($post->body,30)}}</td>
                                     <td>{{$post->category->category}}</td>
-                                    <td> {{$post->status?'Draft':'Public'}}</td>
+                                    <td>
+                                        @if(auth()->user()->is_admin)
+                                            <form action="{{route('post.approve',$post->id)}}" method="get"
+                                               onsubmit="return confirm('Are you sure ?')">
+                                            {{method_field('PATCH')}}
+                                            {{csrf_field()}}
+                                            <div class="form-group text-right col-sm-12">
+                                                <button type="submit" class="btn btn-primary btn-xs">
+                                                    @if($post->status) Disapprove @else Approve
+                                                    @endif
+                                                </button>
+                                            </div>
+                                        </form>
+                                            @else
+                                        {{$post->status?'Draft':'Public'}}
+                                    @endif
+                                    </td>
                                     <td>{{$post->comments_count}}</td>
                                     <td>
-                                        <a class="btn btn-primary btn-xs" href="{{route('post.edit',$post->id)}}"><i
+                                            <a class="btn btn-primary btn-xs" href="{{route('post.edit',$post->id)}}"><i
                                                     class="glyphicon glyphicon-pencil"></i></a>
                                         <form action="{{route('post.destroy',$post->id)}}" method="post"
                                               onsubmit="return confirm('Are you sure ?')" style="display:inline-block;">
@@ -87,6 +103,7 @@
                                             <a class="btn btn-primary btn-xs"
                                                href="{{route('publicpost.show',['id' => $post->id, 'slug' => str_slug($post->title)])}}">Read</a>
                                         </form>
+
                                     </td>
                                 </tr>
                             @empty

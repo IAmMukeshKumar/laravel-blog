@@ -15,12 +15,10 @@ class ApproveCommentController extends Controller
         $comment->update();
 
         return back()->with('success', 'Comment status was changed');
-
     }
 
     public function delete($id)
     {
-
         $comment = Comment::findOrFail($id);
         $comment->delete();
 

@@ -14,14 +14,6 @@ class PostAdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    /*
-     * Display search result.
-     */
     public function index(Request $request)
     {
         $paginate = $request->has('paginate') ? $request->input('paginate') : 5;
@@ -33,7 +25,13 @@ class PostAdminController extends Controller
                 $query->where('body', 'like', '%' . $request->input('body') . '%');
         })->when($request->has('status'), function ($query) use ($request) {
             return $query->where('status', '=', 1);
-        })->with('category')->withCount('comments')->latest()->paginate((int)$paginate);
+        })->with('category')->withCount('comments');
+
+        if (!auth()->user()->is_admin) {
+            $posts = $posts->where('user_id', auth()->user()->id);
+        }
+
+        $posts = $posts->latest()->paginate((int)$paginate);
 
         return view('posts.admin.index', compact('posts'));
     }
@@ -45,7 +43,7 @@ class PostAdminController extends Controller
      */
     public function create()
     {
-        $categories = Category::with('posts')->get();
+        $categories = Category::with('posts')->orderBy('category')->get();
 
         return view('posts.admin.create', compact('categories'));
     }
@@ -59,12 +57,12 @@ class PostAdminController extends Controller
     public function store(PostRequest $request)
     {
         Category::findOrFail($request->category);
-
         $post = new Post;
         $post->title = title_case($request->title);
         $post->body = $request->body;
         $post->category_id = $request->category;
-        $post->status = $request->status;
+        $post->user_id=auth()->user()->id;
+        $post->status = auth()->user()->is_admin ? $request->status:1;
         $post->save();
 
         return back()->with('success', 'Post saved');
@@ -78,11 +76,10 @@ class PostAdminController extends Controller
      */
     public function edit($id)
     {
-        $categories = Category::with('posts')->get();
         $post = Post::findOrFail($id);
+        $categories = Category::with('posts')->orderBy('category')->get();
 
         return view('posts.admin.edit', ['post' => $post, 'categories' => $categories]);
-
     }
 
     /**
@@ -98,8 +95,8 @@ class PostAdminController extends Controller
         $post->title = $request->title;
         $post->body = $request->body;
         $post->category_id = $request->category;
-        $post->status = $request->status;
-        $post->save();
+        $post->status = auth()->user()->is_admin ? $request->status:1;
+        $post->update();
 
         return back()->with('success', 'Your was updated successfully');
     }

@@ -17,7 +17,6 @@
                                 <time title="{{$post->created_at->toDateTimeString()}}">{{$post->created_at->diffForHumans()}}</time>
                                 in <i class="glyphicon glyphicon-folder-open"> </i>&ensp;{{$post->category->category}}
                             </p>
-                            <p>
                             <hr>
                             <p style="word-break: keep-all;overflow: scroll;white-space: pre"> {{ $post->body }}</p>
                         </article>

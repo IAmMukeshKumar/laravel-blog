@@ -15,7 +15,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'role',
+        'name', 'email', 'password', 'is_admin',
+    ];
+
+    protected $casts = [
+        'is_admin' => 'boolean'
     ];
 
     /**
@@ -26,4 +30,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function posts()
+    {
+        return $this->hasMany('App\Post');
+    }
+
 }
