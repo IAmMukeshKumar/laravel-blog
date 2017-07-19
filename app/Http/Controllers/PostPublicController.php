@@ -25,7 +25,7 @@ class PostPublicController extends Controller
                 $query->where('body', 'like', '%' . $request->input('body') . '%');
         })->when($request->has('status'), function ($query) use ($request) {
             return $query;
-        })->latest()->with('category')->paginate((int)$paginate);
+        })->latest()->with('categories')->paginate((int)$paginate);
 
         return view('posts.public.index', compact('posts'));
     }

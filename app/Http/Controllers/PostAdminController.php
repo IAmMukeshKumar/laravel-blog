@@ -6,6 +6,7 @@ use App\Http\Requests\PostRequest;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Category;
+use App\CategoryPost;
 
 class PostAdminController extends Controller
 {
@@ -25,7 +26,7 @@ class PostAdminController extends Controller
                 $query->where('body', 'like', '%' . $request->input('body') . '%');
         })->when($request->has('status'), function ($query) use ($request) {
             return $query->where('status', '=', 1);
-        })->with('category')->withCount('comments');
+        })->with('categories')->withCount('comments');
 
         if (!auth()->user()->is_admin) {
             $posts = $posts->where('user_id', auth()->user()->id);
@@ -56,16 +57,15 @@ class PostAdminController extends Controller
      */
     public function store(PostRequest $request)
     {
-        Category::findOrFail($request->category);
         $post = new Post;
         $post->title = title_case($request->title);
         $post->body = $request->body;
-        $post->category_id = $request->category;
-        $post->user_id=auth()->user()->id;
-        $post->status = auth()->user()->is_admin ? $request->status:1;
+        $post->user_id = auth()->user()->id;
+        $post->status = auth()->user()->is_admin ? $request->status : 1;
         $post->save();
+        $post->categories()->sync($request->category);
 
-        return back()->with('success', 'Post saved');
+        return back()->with('success', 'Post was saved successfully.');
     }
 
     /**
@@ -94,8 +94,8 @@ class PostAdminController extends Controller
         $post = Post::findOrFail($id);
         $post->title = $request->title;
         $post->body = $request->body;
-        $post->category_id = $request->category;
-        $post->status = auth()->user()->is_admin ? $request->status:1;
+        $post->status = auth()->user()->is_admin ? $request->status : 1;
+        $post->categories()->sync($request->category);
         $post->update();
 
         return back()->with('success', 'Your was updated successfully');

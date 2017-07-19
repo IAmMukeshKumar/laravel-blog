@@ -61,7 +61,7 @@
                                     <th>Title</th>
                                     <th>Body</th>
                                     <th>Category</th>
-                                    <th>Status</th>
+                                    <th>change status</th>
                                     <th>Comments</th>
                                     <th>Actions</th>
                                 </tr>
@@ -72,7 +72,11 @@
                                 <tr>
                                     <td>{{str_limit($post->title,10)}}</td>
                                     <td> {{str_limit($post->body,30)}}</td>
-                                    <td>{{$post->category->category}}</td>
+                                    <td>
+                                        @foreach($post->categories as $category)
+                                            {{$category->category}},
+                                        @endforeach
+                                    </td>
                                     <td>
                                         @if(auth()->user()->is_admin)
                                             <form action="{{route('post.approve',$post->id)}}" method="get"
@@ -81,7 +85,7 @@
                                             {{csrf_field()}}
                                             <div class="form-group text-right col-sm-12">
                                                 <button type="submit" class="btn btn-primary btn-xs">
-                                                    @if($post->status) Disapprove @else Approve
+                                                    @if($post->status) Approve @else Disapprove
                                                     @endif
                                                 </button>
                                             </div>

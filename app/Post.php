@@ -18,9 +18,9 @@ class Post extends Model
 
 
      //One category may belong to many posts.
-    public function category()
+    public function categories()
     {
-        return $this->belongsTo('App\Category');
+        return $this->belongsToMany('App\Category')->withTimestamps();
     }
 
 

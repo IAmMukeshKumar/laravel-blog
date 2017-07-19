@@ -35,19 +35,19 @@
                             </div>
 
                             <div class="form-group @if($errors->has('category')) has-error @endif">
-                                {{"Category : "}}
-
-                                <select name="category">
-                                    <option value="{{$post->category->id}}">{{$post->category->category}}</option>
+                              Category :
+                                <select name="category[]" multiple class="form-control category-select">
                                     @foreach($categories as $category)
-                                        @if(old('category')==$category->id)
-                                            <option value="{{$category->id}}" selected>{{$category->category}}</option>
-                                        @elseif($category->id!=$post->category->id)
-                                            <option value="{{$category->id}}">{{$category->category}}</option>
-                                        @endif
+                                        <option value="{{$category->id}}"
+                                                @if(in_array($category->id,old('category',[])))
+                                                selected
+                                                @endif
+                                        >{{$category->category}}</option>
                                     @endforeach
+                                    @foreach($post->categories as $category)
+                                           <option value="{{$category->id}}" selected>{{$category->category}}</option>
+                                        @endforeach
                                 </select>
-
                                 @if($errors->has('category'))
                                     <p class="help-block">{{$errors->first('category')}}</p>
                                 @endif

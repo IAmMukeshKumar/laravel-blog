@@ -28,6 +28,17 @@
                             {{--Input body--}}
                             <div class="form-group @if($errors->has('body')) has-error @endif">
                                 <label>Body</label>
+
+                                <div id="post-toolbar">
+                                    <button class="ql-bold">Bold</button>
+                                    <button class="ql-italic">Italic</button>
+                                </div>
+
+                                <!-- Create the editor container -->
+                                <div id="post-editor">
+                                    <p>Hello World!</p>
+                                </div>
+
                                 <textarea class="form-control" rows="10" placeholder="Write something"
                                           name="body"> {{old('body')}}</textarea>
                                 @if($errors->has('body'))
@@ -37,14 +48,14 @@
 
                             {{--Select category--}}
                             <div class="form-group @if($errors->has('category')) has-error @endif">
-                                {{"Category : "}}
-                                <select name="category">
+                                Category :
+                                <select name="category[]" multiple class="form-control category-select">
                                     @foreach($categories as $category)
-                                        @if(old('category')==$category->id)
-                                            <option value="{{$category->id}}" selected>{{$category->category}}</option>
-                                        @else
-                                            <option value="{{$category->id}}">{{$category->category}}</option>
-                                        @endif
+                                        <option value="{{$category->id}}"
+                                                @if(in_array($category->id,old('category',[])))
+                                                selected
+                                                @endif
+                                        >{{$category->category}}</option>
                                     @endforeach
                                 </select>
                                 @if($errors->has('category'))
@@ -54,20 +65,20 @@
 
                             {{--Select status--}}
                             @if(auth()->user()->is_admin)
-                            <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
-                                <label for="status" class="col-md-4 control-label">status</label>
-                                Draft:
-                                <input type="radio" name="status" id="optionsRadios1" value=1
-                                       @if(old('status')==1) checked @endif>
-                                Public:
-                                <input type="radio" name="status" id="optionsRadios0" value=0
-                                       @if(old('status')==0) checked @endif>
-                                @if ($errors->has('status'))
-                                    <span class="help-block">
+                                <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
+                                    <label for="status" class="col-md-4 control-label">status</label>
+                                    Draft:
+                                    <input type="radio" name="status" id="optionsRadios1" value=1
+                                           @if(old('status')==1) checked @endif>
+                                    Public:
+                                    <input type="radio" name="status" id="optionsRadios0" value=0
+                                           @if(old('status')==0) checked @endif>
+                                    @if ($errors->has('status'))
+                                        <span class="help-block">
                                         <strong>{{ $errors->first('status') }}</strong>
                                     </span>
-                                @endif
-                            </div>
+                                    @endif
+                                </div>
                             @endif
 
                             <button type="reset" class="btn btn-outline-primary">RESET</button>
