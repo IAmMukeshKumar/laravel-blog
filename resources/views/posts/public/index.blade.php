@@ -4,7 +4,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-8 col-md-offset-1">
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="well">
@@ -13,12 +13,14 @@
                                 {{--Input pagination--}}
                                 <div class="form-group">
                                     <select class="form-control" name="paginate" value="{{request('paginate')}}">
-                                        <option value="5">5</option>
-                                        <option value="10">10</option>
-                                        <option value="15">15</option>
-                                        <option value="25">25</option>
-                                        <option value="40">40</option>
-                                        <option value="55">55</option>
+                                        @if(request('paginate')>1)
+                                            <option value="request('paginate')">{{request('paginate')}}</option>
+                                        @endif
+                                        @for($i=5;$i<=55;$i<15 ?$i+=5 : $i+=10)
+                                            @if(request('paginate') != $i)
+                                                <option value={{$i}}>{{$i}}</option>
+                                            @endif
+                                        @endfor
                                     </select>
                                 </div>
 
@@ -72,6 +74,7 @@
                     </div>
                 </div>
             </div>
+           @include('widgets.publicSidebarTopCategory')
         </div>
     </div>
 @endsection

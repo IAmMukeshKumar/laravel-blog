@@ -21,7 +21,7 @@ class CategoryController extends Controller
         $categories = Category::where(function ($query) use ($request) {
             if ($request->has('category'))
                 $query->where('category', 'like', '%' . $request->input('category') . '%');
-        })->withCount('posts')->orderBy('category')->paginate((int)$paginate);
+        })->withCount('posts')->orderBy('posts_count','desc')->paginate((int)$paginate);
 
         return view('categories.index', compact('categories'));
     }

@@ -29,17 +29,7 @@
                             <div class="form-group @if($errors->has('body')) has-error @endif">
                                 <label>Body</label>
 
-                                <div id="post-toolbar">
-                                    <button class="ql-bold">Bold</button>
-                                    <button class="ql-italic">Italic</button>
-                                </div>
-
-                                <!-- Create the editor container -->
-                                <div id="post-editor">
-                                    <p>Hello World!</p>
-                                </div>
-
-                                <textarea class="form-control" rows="10" placeholder="Write something"
+                                <textarea class="form-control post-editor" rows="10" placeholder="Write something"
                                           name="body"> {{old('body')}}</textarea>
                                 @if($errors->has('body'))
                                     <p class="help-block">{{$errors->first('body')}}</p>

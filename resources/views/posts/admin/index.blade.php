@@ -18,12 +18,15 @@
 
                                     {{--Pagination Option--}}
                                     <select class="form-control" name="paginate" value="{{request('paginate')}}">
-                                        <option value="5">5</option>
-                                        <option value="10">10</option>
-                                        <option value="15">15</option>
-                                        <option value="25">25</option>
-                                        <option value="40">40</option>
-                                        <option value="55">55</option>
+                                        @if(request('paginate')>1)
+                                            <option value="request('paginate')"
+                                                    selected>{{request('paginate')}}</option>
+                                        @endif
+                                        @for($i=5;$i<=55;$i<15 ?$i+=5 : $i+=10)
+                                            @if(request('paginate') != $i)
+                                                <option value={{$i}}>{{$i}}</option>
+                                            @endif
+                                        @endfor
                                     </select>
                                 </div>
 
@@ -61,7 +64,7 @@
                                     <th>Title</th>
                                     <th>Body</th>
                                     <th>Category</th>
-                                    <th>change status</th>
+                                    <th> @if(auth()->user()->is_admin) Change status  @else Status @endif</th>
                                     <th>Comments</th>
                                     <th>Actions</th>
                                 </tr>
@@ -80,23 +83,23 @@
                                     <td>
                                         @if(auth()->user()->is_admin)
                                             <form action="{{route('post.approve',$post->id)}}" method="get"
-                                               onsubmit="return confirm('Are you sure ?')">
-                                            {{method_field('PATCH')}}
-                                            {{csrf_field()}}
-                                            <div class="form-group text-right col-sm-12">
-                                                <button type="submit" class="btn btn-primary btn-xs">
-                                                    @if($post->status) Approve @else Disapprove
-                                                    @endif
-                                                </button>
-                                            </div>
-                                        </form>
-                                            @else
-                                        {{$post->status?'Draft':'Public'}}
-                                    @endif
+                                                  onsubmit="return confirm('Are you sure ?')">
+                                                {{method_field('PATCH')}}
+                                                {{csrf_field()}}
+                                                <div class="form-group text-right col-sm-12">
+                                                    <button type="submit" class="btn btn-primary btn-xs">
+                                                        @if($post->status) Approve @else Disapprove
+                                                        @endif
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        @else
+                                            {{$post->status?'Draft':'Public'}}
+                                        @endif
                                     </td>
                                     <td>{{$post->comments_count}}</td>
                                     <td>
-                                            <a class="btn btn-primary btn-xs" href="{{route('post.edit',$post->id)}}"><i
+                                        <a class="btn btn-primary btn-xs" href="{{route('post.edit',$post->id)}}"><i
                                                     class="glyphicon glyphicon-pencil"></i></a>
                                         <form action="{{route('post.destroy',$post->id)}}" method="post"
                                               onsubmit="return confirm('Are you sure ?')" style="display:inline-block;">
@@ -121,7 +124,6 @@
                         <div class="text-center">
                             {{ $posts->appends(request()->all())->links() }}
                         </div>
-
                     </div>
                 </div>
             </div>

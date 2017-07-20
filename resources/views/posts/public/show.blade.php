@@ -4,7 +4,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-8 col-md-offset-1">
 
                 @include('messages.successMessage')
 
@@ -17,17 +17,19 @@
                                 <time title="{{$post->created_at->toDateTimeString()}}">{{$post->created_at->diffForHumans()}}</time>
                                 in <i class="glyphicon glyphicon-folder-open"> </i>&ensp;
                                 @foreach($post->categories as $category)
-                                    {{$category->category}},
+                                    {{$category->category}}
                                 @endforeach
                             </p>
                             <hr>
-                            <p style="word-break: keep-all;overflow: scroll;white-space: pre"> {{ $post->body }}</p>
+                            <p> {!! $post->body !!}</p>
                         </article>
                     </div>
                 </div>
+                @include('comments.create')
+                @include('comments.show')
             </div>
+            @include('widgets.publicSidebarTopCategory')
         </div>
     </div>
-    @include('comments.create')
-    @include('comments.show')
+
 @endsection

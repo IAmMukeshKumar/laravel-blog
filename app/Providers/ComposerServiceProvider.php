@@ -3,23 +3,24 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 
-class AppServiceProvider extends ServiceProvider
+class ComposerServiceProvider extends ServiceProvider
 {
     /**
-     * Bootstrap any application services.
+     * Bootstrap the application services.
      *
      * @return void
      */
     public function boot()
     {
-        Schema::defaultStringLength(191);
+        View::composer(
+            ['widgets.publicSidebarTopCategory'],'App\Http\ViewComposers\SidebarWidgetComposer'
+        );
     }
 
     /**
-     * Register any application services.
+     * Register the application services.
      *
      * @return void
      */

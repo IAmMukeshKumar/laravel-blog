@@ -17,12 +17,15 @@
 
                                     {{--Pagination --}}
                                     <select class="form-control" name="paginate">
-                                        <option value="5">5</option>
-                                        <option value="10">10</option>
-                                        <option value="15">15</option>
-                                        <option value="25">25</option>
-                                        <option value="40">40</option>
-                                        <option value="55">55</option>
+                                        @if(request('paginate')>1)
+                                            <option value="request('paginate')" selected>{{request('paginate')}}</option>
+                                        @endif
+                                        @for($i=5;$i<=55;$i<15 ?$i+=5 : $i+=10)
+                                            @if(request('paginate') != $i)
+                                                <option value={{$i}}>{{$i}}</option>
+                                            @endif
+
+                                        @endfor
                                     </select>
 
                                 </div>
@@ -45,7 +48,8 @@
                                 <th>Title</th>
                                 <th>Description</th>
                                 <th>Posts</th>
-                               @if(auth()->user()->is_admin) <th>Actions</th>@endif
+                                @if(auth()->user()->is_admin)
+                                    <th>Actions</th>@endif
                             </tr>
                             </thead>
                             <tbody>
@@ -54,21 +58,23 @@
                                     <td>{{$category->category}}</td>
                                     <td>{{$category->description}}</td>
                                     <td>{{$category->posts_count}}</td>
-                                    @if(auth()->user()->is_admin) <td>
-                                        <a class="btn btn-primary btn-xs"
-                                           href="{{route('category.edit',$category->id)}}"><i
-                                                    class="glyphicon glyphicon-pencil"></i></a>
-                                        <form action="{{route('category.destroy',$category->id)}}" method="post"
-                                              onsubmit="return confirm('Are you sure ?')" style="display:inline-block;">
-                                            {{method_field('DELETE')}}
-                                            {{csrf_field()}}
-                                            @if(!$category->posts_count)
-                                                <button type="submit"
-                                                        class="btn btn-danger btn-xs">
-                                                    <i class="glyphicon glyphicon-trash"></i></button>
-                                            @endif
-                                        </form>
-                                    </td>@endif
+                                    @if(auth()->user()->is_admin)
+                                        <td>
+                                            <a class="btn btn-primary btn-xs"
+                                               href="{{route('category.edit',$category->id)}}"><i
+                                                        class="glyphicon glyphicon-pencil"></i></a>
+                                            <form action="{{route('category.destroy',$category->id)}}" method="post"
+                                                  onsubmit="return confirm('Are you sure ?')"
+                                                  style="display:inline-block;">
+                                                {{method_field('DELETE')}}
+                                                {{csrf_field()}}
+                                                @if(!$category->posts_count)
+                                                    <button type="submit"
+                                                            class="btn btn-danger btn-xs">
+                                                        <i class="glyphicon glyphicon-trash"></i></button>
+                                                @endif
+                                            </form>
+                                        </td>@endif
                                 </tr>
                             @empty
                                 <div class="text-center">
@@ -81,7 +87,7 @@
                         </table>
 
                         <div class="text-center">
-                            {{ $categories->appends(request()->all())->links() }}
+                            {{--{{ $categories->appends(request()->all())->links() }}--}}
                         </div>
                     </div>
                 </div>

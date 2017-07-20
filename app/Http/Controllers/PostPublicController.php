@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
-use App\Comment;
-use phpDocumentor\Reflection\Types\Integer;
+use App\Category;
+
 
 class PostPublicController extends Controller
 {
@@ -18,7 +18,7 @@ class PostPublicController extends Controller
     {
         $paginate = $request->has('paginate') ? $request->input('paginate') : 5;
 
-        $posts = Post::where('status',0)->where(function ($query) use ($request) {
+        $posts = Post::where('status', 0)->where(function ($query) use ($request) {
             if ($request->has('title'))
                 $query->where('title', 'like', '%' . $request->input('title') . '%');
             if ($request->has('body'))
@@ -27,7 +27,20 @@ class PostPublicController extends Controller
             return $query;
         })->latest()->with('categories')->paginate((int)$paginate);
 
-        return view('posts.public.index', compact('posts'));
+
+        return view('posts.public.index', ['posts' => $posts]);
+    }
+
+    public function showCategoryPosts($id, $slug)
+    {
+
+        $category = Category::findOrFail($id)->load('posts');
+//       foreach($category->posts as $post)
+//       {
+//           echo $post->title;
+//       }
+//       die;
+        return view('posts.public.CategoryRelatedPosts',compact('category'));
     }
 
     /**

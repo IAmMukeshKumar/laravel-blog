@@ -26,18 +26,20 @@ Auth::routes();
 Route::middleware('auth')->group(function () {
     Route::resource('post', 'PostAdminController');
 
-        Route::resource('category', 'CategoryController', [
-            'except' => 'show'
-        ]);
+    Route::resource('category', 'CategoryController', [
+        'except' => 'show'
+    ]);
 
 
-    Route::get('approve/{comment}','ApproveCommentController@approve')->name('comment.approve');
-    Route::get('delete/{comment}','ApproveCommentController@delete')->name('comment.delete');
-    Route::get('Post/{post}','ApprovePostController@approve')->name('post.approve');
+    Route::get('approve/{comment}', 'ApproveCommentController@approve')->name('comment.approve');
+    Route::get('delete/{comment}', 'ApproveCommentController@delete')->name('comment.delete');
+    Route::get('Post/{post}', 'ApprovePostController@approve')->name('post.approve');
+
 
 });
 
 // Comments route
 Route::post('post/{post}/comment', 'CommentController@store')->name('comment.store');
+Route::get('category/{id}/{slug?}', 'PostPublicController@showCategoryPosts')->name('category.posts');
 
 

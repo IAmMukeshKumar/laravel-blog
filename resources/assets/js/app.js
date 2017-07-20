@@ -11,10 +11,10 @@ require('bootstrap-sass');
 import 'select2';
 jQuery(".category-select").select2({});
 
-var Quill = require('quill');
-
-var editor = new Quill('#post-editor', {
-    modules: { toolbar: '#post-toolbar' },
-    theme: 'snow'
+require('trumbowyg');
+import icons from "trumbowyg/dist/ui/icons.svg"
+$.trumbowyg.svgPath = icons;
+$('.post-editor').trumbowyg({
+    autogrow: true
 });
 
