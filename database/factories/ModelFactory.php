@@ -31,7 +31,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 $factory->define(App\Category::class, function (Faker\Generator $faker) {
 
     return [
-        'category' => $faker->unique()->word,
+        'title' => $faker->unique()->word,
         'description' => $faker->sentence,
     ];
 

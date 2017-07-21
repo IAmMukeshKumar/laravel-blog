@@ -42,10 +42,10 @@
                                                 @if(in_array($category->id,old('category',[])))
                                                 selected
                                                 @endif
-                                        >{{$category->category}}</option>
+                                        >{{$category->title}}</option>
                                     @endforeach
                                     @foreach($post->categories as $category)
-                                        <option value="{{$category->id}}" selected>{{$category->category}}</option>
+                                        <option value="{{$category->id}}" selected>{{$category->title}}</option>
                                     @endforeach
                                 </select>
                                 @if($errors->has('category'))

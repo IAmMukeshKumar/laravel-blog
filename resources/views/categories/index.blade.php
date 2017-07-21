@@ -17,23 +17,20 @@
 
                                     {{--Pagination --}}
                                     <select class="form-control" name="paginate">
-                                        @if(request('paginate')>1)
-                                            <option value="request('paginate')" selected>{{request('paginate')}}</option>
-                                        @endif
-                                        @for($i=5;$i<=55;$i<15 ?$i+=5 : $i+=10)
-                                            @if(request('paginate') != $i)
-                                                <option value={{$i}}>{{$i}}</option>
-                                            @endif
-
-                                        @endfor
+                                        <option value="5" @if(request('paginate') === '5') selected @endif>5</option>
+                                        <option value="10" @if(request('paginate') === '10') selected @endif>10</option>
+                                        <option value="15" @if(request('paginate') === '15') selected @endif>15</option>
+                                        <option value="20" @if(request('paginate') === '20') selected @endif>20</option>
+                                        <option value="30" @if(request('paginate') === '30') selected @endif>30</option>
+                                        <option value="45" @if(request('paginate') === '45') selected @endif>45</option>
                                     </select>
 
                                 </div>
                                 <div class="form-group">
 
-                                    {{--Input category search--}}
-                                    <input type="text" class="form-control" name="category" placeholder="Category"
-                                           value="{{request('category')}}">
+                                    {{--Input title search--}}
+                                    <input type="text" class="form-control" name="title" placeholder="Title"
+                                           value="{{request('title')}}">
 
                                 </div>
                                 <button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i>
@@ -55,7 +52,7 @@
                             <tbody>
                             @forelse($categories as $category)
                                 <tr>
-                                    <td>{{$category->category}}</td>
+                                    <td>{{$category->title}}</td>
                                     <td>{{$category->description}}</td>
                                     <td>{{$category->posts_count}}</td>
                                     @if(auth()->user()->is_admin)
@@ -81,8 +78,11 @@
                                     {{"No data found"}}
                                 </div>
                             @endforelse
+
+                            @if(auth()->user()->is_admin)
                             <a class="btn btn-primary btn-xs" href="{{route('category.create')}}"><i
                                         class="glyphicon glyphicon-plus"></i> New category</a>
+                                @endif
                             </tbody>
                         </table>
 

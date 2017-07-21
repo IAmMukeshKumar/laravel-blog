@@ -44,7 +44,7 @@ class PostAdminController extends Controller
      */
     public function create()
     {
-        $categories = Category::with('posts')->orderBy('category')->get();
+        $categories = Category::with('posts')->orderBy('title')->get();
 
         return view('posts.admin.create', compact('categories'));
     }
@@ -77,7 +77,7 @@ class PostAdminController extends Controller
     public function edit($id)
     {
         $post = Post::findOrFail($id);
-        $categories = Category::with('posts')->orderBy('category')->get();
+        $categories = Category::with('posts')->orderBy('title')->get();
 
         return view('posts.admin.edit', ['post' => $post, 'categories' => $categories]);
     }

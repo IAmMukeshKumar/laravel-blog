@@ -13,17 +13,17 @@
                     <div class="panel-heading">Update category</div>
                     <div class="panel-body">
                         <form action="{{route('category.update',$category->id)}}" method="post"
-                              id="update-category-form">
+                              id="update-title-form">
                             {{method_field('PATCH')}}
                             {{csrf_field()}}
 
                             {{--Category edition column--}}
-                            <div class="form-group @if($errors->has('category')) has-error @endif">
-                                <label> Category</label>
-                                <input type="text" class="form-control" placeholder="Category" name="category"
-                                       value="{{old('category',$category->category )}}">
-                                @if($errors->has('category'))
-                                    <p class="help-block">{{$errors->first('category')}}</p>
+                            <div class="form-group @if($errors->has('title')) has-error @endif">
+                                <label> Title</label>
+                                <input type="text" class="form-control" placeholder="Title" name="title"
+                                       value="{{old('title',$category->title )}}">
+                                @if($errors->has('title'))
+                                    <p class="help-block">{{$errors->first('title')}}</p>
                                 @endif
                             </div>
 

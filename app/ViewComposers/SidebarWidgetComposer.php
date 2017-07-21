@@ -30,7 +30,7 @@ class SidebarWidgetComposer
         // calculate the data
         // and share
 
-        $categories = Category::withCount('posts')->orderBy('posts_count','desc')->get();
+        $categories = Category::withCount('posts')->orderBy('posts_count','desc')->limit(5)->get();
         $view->with('categories', $categories);
     }
 }

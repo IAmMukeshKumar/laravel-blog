@@ -19,8 +19,8 @@ class CategoryController extends Controller
         $paginate = $request->has('paginate') ? $request->input('paginate') : 5;
 
         $categories = Category::where(function ($query) use ($request) {
-            if ($request->has('category'))
-                $query->where('category', 'like', '%' . $request->input('category') . '%');
+            if ($request->has('title'))
+                $query->where('title', 'like', '%' . $request->input('title') . '%');
         })->withCount('posts')->orderBy('posts_count','desc')->paginate((int)$paginate);
 
         return view('categories.index', compact('categories'));
@@ -48,12 +48,11 @@ class CategoryController extends Controller
     {
             User::findOrFail(auth()->user()->is_admin);
             $category = new Category;
-            $category->category = $request->category;
+            $category->title = $request->title;
             $category->description = $request->description;
             $category->save();
 
             return back()->with('success', 'Category was added successfully');
-
     }
 
 

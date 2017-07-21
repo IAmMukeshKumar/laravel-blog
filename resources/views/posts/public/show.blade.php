@@ -17,7 +17,7 @@
                                 <time title="{{$post->created_at->toDateTimeString()}}">{{$post->created_at->diffForHumans()}}</time>
                                 in <i class="glyphicon glyphicon-folder-open"> </i>&ensp;
                                 @foreach($post->categories as $category)
-                                    {{$category->category}}
+                                    {{$category->title}}
                                 @endforeach
                             </p>
                             <hr>

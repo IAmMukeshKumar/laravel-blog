@@ -36,6 +36,7 @@
                                 @endif
                             </div>
 
+                            <input type="file" name="img">
                             {{--Select category--}}
                             <div class="form-group @if($errors->has('category')) has-error @endif">
                                 Category :
@@ -45,7 +46,7 @@
                                                 @if(in_array($category->id,old('category',[])))
                                                 selected
                                                 @endif
-                                        >{{$category->category}}</option>
+                                        >{{$category->title}}</option>
                                     @endforeach
                                 </select>
                                 @if($errors->has('category'))

@@ -35,11 +35,6 @@ class PostPublicController extends Controller
     {
 
         $category = Category::findOrFail($id)->load('posts');
-//       foreach($category->posts as $post)
-//       {
-//           echo $post->title;
-//       }
-//       die;
         return view('posts.public.CategoryRelatedPosts',compact('category'));
     }
 

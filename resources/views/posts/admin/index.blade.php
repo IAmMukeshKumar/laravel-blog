@@ -17,16 +17,14 @@
                                 <div class="form-group">
 
                                     {{--Pagination Option--}}
-                                    <select class="form-control" name="paginate" value="{{request('paginate')}}">
-                                        @if(request('paginate')>1)
-                                            <option value="request('paginate')"
-                                                    selected>{{request('paginate')}}</option>
-                                        @endif
-                                        @for($i=5;$i<=55;$i<15 ?$i+=5 : $i+=10)
-                                            @if(request('paginate') != $i)
-                                                <option value={{$i}}>{{$i}}</option>
-                                            @endif
-                                        @endfor
+                                    <select class="form-control" name="paginate">
+                                        <option value="5" @if(request('paginate')=== '5') selected @endif>5</option>
+                                        <option value="10" @if(request('paginate')=== '10') selected @endif>10</option>
+                                        <option value="15" @if(request('paginate')=== '15') selected @endif>15</option>
+                                        <option value="20" @if(request('paginate')=== '20') selected @endif>20</option>
+                                        <option value="30" @if(request('paginate')=== '30') selected @endif>30</option>
+                                        <option value="45" @if(request('paginate')=== '45') selected @endif>45</option>
+
                                     </select>
                                 </div>
 
@@ -77,7 +75,10 @@
                                     <td> {{str_limit($post->body,30)}}</td>
                                     <td>
                                         @foreach($post->categories as $category)
-                                            {{$category->category}},
+                                            {{$category->title}}
+                                            @if(!$loop->last)
+                                                ,
+                                                @endif
                                         @endforeach
                                     </td>
                                     <td>

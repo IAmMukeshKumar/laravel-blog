@@ -12,24 +12,23 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Add new category</div>
                     <div class="panel-body">
-                        <form action="{{route('category.store')}}" method="post" id="add-category-form">
+                        <form action="{{route('category.store')}}" method="post" id="add-title-form">
                             {{csrf_field()}}
 
                             {{--Input category--}}
-                            <div class="form-group @if($errors->has('category')) has-error @endif">
-                                <label> Category</label>
-                                <input type="text" class="form-control" placeholder="Category" name="category"
-                                       value="{{old('category')}}">
-                                @if($errors->has('category'))
-                                    <p class="help-block">{{$errors->first('category')}}</p>
+                            <div class="form-group @if($errors->has('title')) has-error @endif">
+                                <label> Title</label>
+                                <input type="text" class="form-control" placeholder="Title" name="title"
+                                       value="{{old('title')}}">
+                                @if($errors->has('title'))
+                                    <p class="help-block">{{$errors->first('title')}}</p>
                                 @endif
                             </div>
 
                             {{--Input description--}}
                             <div class="form-group @if($errors->has('description')) has-error @endif">
                                 <label>Description</label>
-                                <textarea class="form-control" rows="3" placeholder="Optional"
-                                          name="description"> {{old('description')}}</textarea>
+                                <textarea class="form-control" rows="3" placeholder="Optional" name="description">{{old('description')}}</textarea>
                                 @if($errors->has('description'))
                                     <p class="help-block">{{$errors->first('description')}}</p>
                                 @endif
