@@ -44,6 +44,9 @@
                         {{--Show post result--}}
                         @forelse($posts as $post)
                             <article>
+
+                                <img src="{{asset($post->photo_path)}}">
+
                                 <h2>
                                     <a href="{{route('publicpost.show',['id' => $post->id, 'slug' => str_slug($post->title)])}}">{{title_case($post->title)}}</a>
                                 </h2>

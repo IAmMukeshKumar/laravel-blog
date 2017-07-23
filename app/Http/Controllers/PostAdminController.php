@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\PostRequest;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Category;
 use App\CategoryPost;
+
 
 class PostAdminController extends Controller
 {
@@ -57,11 +59,13 @@ class PostAdminController extends Controller
      */
     public function store(PostRequest $request)
     {
+        $image=$request->imageUpload->store('public');
         $post = new Post;
         $post->title = title_case($request->title);
         $post->body = $request->body;
         $post->user_id = auth()->user()->id;
         $post->status = auth()->user()->is_admin ? $request->status : 1;
+        $post->photo_path=Storage::url($image);
         $post->save();
         $post->categories()->sync($request->category);
 
@@ -91,8 +95,10 @@ class PostAdminController extends Controller
      */
     public function update(PostRequest $request, $id)
     {
+        $image=$request->imageUpload->store('public');
         $post = Post::findOrFail($id);
         $post->title = $request->title;
+        $post->photo_path=Storage::url($image);
         $post->body = $request->body;
         $post->status = auth()->user()->is_admin ? $request->status : 1;
         $post->categories()->sync($request->category);

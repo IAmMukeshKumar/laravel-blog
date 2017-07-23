@@ -59,6 +59,7 @@
                             <thead>
                             <div class="text-center">
                                 <tr>
+                                    <th>Image</th>
                                     <th>Title</th>
                                     <th>Body</th>
                                     <th>Category</th>
@@ -71,6 +72,8 @@
                             <tbody>
                             @forelse($posts as $post)
                                 <tr>
+
+                                    <td> <img src="{{asset($post->photo_path)}}" style="width:30px;height:30px;"></td>
                                     <td>{{str_limit($post->title,10)}}</td>
                                     <td> {{str_limit($post->body,30)}}</td>
                                     <td>

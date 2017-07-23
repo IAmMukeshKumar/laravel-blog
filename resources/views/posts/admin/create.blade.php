@@ -12,7 +12,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">New Post</div>
                     <div class="panel-body">
-                        <form action="{{route('post.store')}}" method="post" id="update-task-form">
+                        <form action="{{route('post.store')}}" enctype="multipart/form-data" method="post" id="update-task-form">
                             {{csrf_field()}}
 
                             {{--Input title--}}
@@ -30,8 +30,6 @@
                             <div class="form-group @if($errors->has('body')) has-error @endif">
                                 <label>Body</label>
 
-
-
                                 <textarea class="form-control post-editor" rows="10" placeholder="Write something"
                                           name="body">{{old('body')}}</textarea>
                                 @if($errors->has('body'))
@@ -39,7 +37,15 @@
                                 @endif
                             </div>
 
-                            <input type="file" name="img">
+                            {{--Select Image--}}
+                            <div class="form-group @if($errors->has('imageUpload')) has-error @endif">
+                                <label>Image</label>
+                                <input type="file" name="imageUpload">
+                                @if($errors->has('imageUpload'))
+                                    <p class="help-block">{{$errors->first('imageUpload')}}</p>
+                                @endif
+                            </div>
+
                             {{--Select category--}}
                             <div class="form-group @if($errors->has('category')) has-error @endif">
                                 Category :

@@ -10,6 +10,8 @@
 
                 <div class="panel panel-default">
                     <div class="panel-body">
+
+                        <img src="{{asset($post->photo_path)}}" style="width:720px;height:128px;">
                         <h1>{{($post->title)}}</h1>
                         <article>
                             <p>
