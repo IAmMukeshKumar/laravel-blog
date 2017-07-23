@@ -52,9 +52,7 @@
                                     <time title="{{$post->created_at->toDateTimeString()}}">{{$post->created_at->diffForHumans()}}</time>
                                     in
                                     <i class="glyphicon glyphicon-folder-open"> </i>&ensp;
-                                    @php
-                                    $i=1;
-                                    @endphp
+
                                     @foreach($post->categories as $category)
                                         {{$category->title}}
                                         @if(!$loop->last)

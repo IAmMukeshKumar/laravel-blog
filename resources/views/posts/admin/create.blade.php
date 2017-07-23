@@ -26,11 +26,14 @@
                             </div>
 
                             {{--Input body--}}
+
                             <div class="form-group @if($errors->has('body')) has-error @endif">
                                 <label>Body</label>
 
+
+
                                 <textarea class="form-control post-editor" rows="10" placeholder="Write something"
-                                          name="body"> {{old('body')}}</textarea>
+                                          name="body">{{old('body')}}</textarea>
                                 @if($errors->has('body'))
                                     <p class="help-block">{{$errors->first('body')}}</p>
                                 @endif

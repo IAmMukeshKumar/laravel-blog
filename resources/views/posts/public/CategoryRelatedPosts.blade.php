@@ -23,7 +23,10 @@
                                     in
                                     <i class="glyphicon glyphicon-folder-open"> </i>&ensp;
                                     @foreach($post->categories as $category)
-                                        {{$category->title}},
+                                        {{$category->title}}
+                                        @if(!$loop->last)
+                                            ,
+                                        @endif
                                     @endforeach
                                 </p>
                                 <p>
