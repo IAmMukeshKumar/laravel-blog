@@ -14,9 +14,15 @@
                         {{--Show post result--}}
                         @forelse($category->posts as $post)
                             <article>
+                                @if(!$post->photo_path)
+                                    <img src="{{asset('storage/default.png')}}" height="200" width="200">
+                                @else
+                                    <img src="{{asset('storage/'.$post->photo_path)}}" height="200" width="200">
+                                @endif
                                 <h2>
                                     <a href="{{route('publicpost.show',['id' => $post->id, 'slug' => str_slug($post->title)])}}">{{title_case($post->title)}}</a>
                                 </h2>
+                                Author: {{$post->user->name}}
                                 <p>
                                     <br><i class="glyphicon glyphicon-calendar"></i>
                                     <time title="{{$post->created_at->toDateTimeString()}}">{{$post->created_at->diffForHumans()}}</time>
@@ -30,7 +36,7 @@
                                     @endforeach
                                 </p>
                                 <p>
-                                    {{str_limit($post->body,200)}}
+                                    {!! str_limit($post->body,200) !!}
                                 </p>
                             </article>
                             <hr>

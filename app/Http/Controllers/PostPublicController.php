@@ -33,8 +33,8 @@ class PostPublicController extends Controller
 
     public function showCategoryPosts($id, $slug)
     {
-
         $category = Category::findOrFail($id)->load('posts');
+
         return view('posts.public.CategoryRelatedPosts',compact('category'));
     }
 
@@ -50,7 +50,7 @@ class PostPublicController extends Controller
 
         if ($slug !== str_slug($post->title)) {
 
-            return redirect(route('publicpost.show', ['id' => $post, 'slug' => str_slug($post->title)]), 301);
+            return redirect(route('publicpost.show', ['id' => $post->id, 'slug' => str_slug($post->title)]), 301);
         }
 
         $comments = $post->comments;

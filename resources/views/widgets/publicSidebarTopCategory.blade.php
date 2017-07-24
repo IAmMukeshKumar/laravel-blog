@@ -1,7 +1,7 @@
 <div class="col-md-3">
     <div class="panel panel-default">
         <div class="panel-body">
-            <h4>Top 5 Categories</h4>
+            <h4>Top Categories</h4>
             <ul class="list-group">
                 @foreach($categories as $category)
                     <li class="list-group-item">

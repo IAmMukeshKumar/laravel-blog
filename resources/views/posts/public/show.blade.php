@@ -11,8 +11,13 @@
                 <div class="panel panel-default">
                     <div class="panel-body">
 
-                        <img src="{{asset($post->photo_path)}}" style="width:720px;height:128px;">
+                        @if(!$post->photo_path)
+                            <img src="{{asset('storage/default.png')}}" height="200" width="720">
+                        @else
+                            <img src="{{asset('storage/'.$post->photo_path)}}" height="200" width="720">
+                        @endif
                         <h1>{{($post->title)}}</h1>
+                        Author: {{$post->user->name}}
                         <article>
                             <p>
                                 <br><i class="glyphicon glyphicon-calendar"></i>
@@ -22,7 +27,7 @@
                                     {{$category->title}}
                                     @if(!$loop->last)
                                         ,
-                                        @endif
+                                    @endif
                                 @endforeach
                             </p>
                             <hr>

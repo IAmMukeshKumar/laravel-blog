@@ -12,7 +12,8 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">New Post</div>
                     <div class="panel-body">
-                        <form action="{{route('post.store')}}" enctype="multipart/form-data" method="post" id="update-task-form">
+                        <form action="{{route('post.store')}}" enctype="multipart/form-data" method="post"
+                              id="update-task-form">
                             {{csrf_field()}}
 
                             {{--Input title--}}

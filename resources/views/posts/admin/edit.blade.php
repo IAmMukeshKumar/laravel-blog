@@ -12,12 +12,24 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Update Post</div>
                     <div class="panel-body">
-                        <form action="{{route('post.update',$post->id)}}" method="post" enctype="multipart/form-data" id="update-task-form">
+                        <form action="{{route('post.update',$post->id)}}" method="post" enctype="multipart/form-data"
+                              id="update-task-form">
                             {{method_field('PATCH')}}
                             {{csrf_field()}}
 
-                            <img src="{{asset($post->photo_path)}}" style="width:128px;height:128px;">
-                            <input type="file"  name="imageUpload" id="imageInput">
+                            @if(!$post->photo_path)
+                                <img src="{{asset('storage/default.png')}}" height="128" width="128">
+                            @else
+                                <img src="{{asset('storage/'.$post->photo_path)}}" height="128" width="128">
+                            @endif
+
+                            <div class="form-group @if($errors->has('imageUpload')) has-error @endif">
+                                <label> Image </label>
+                                <input type="file" name="imageUpload" id="imageInput">
+                                @if($errors->has('imageUpload'))
+                                    <p class="help-block">{{$errors->first('imageUpload')}}</p>
+                                @endif
+                            </div>
 
                             <div class="form-group @if($errors->has('title')) has-error @endif">
                                 <label> Title</label>

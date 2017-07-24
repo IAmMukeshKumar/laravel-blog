@@ -28,7 +28,7 @@ class PostAdminController extends Controller
                 $query->where('body', 'like', '%' . $request->input('body') . '%');
         })->when($request->has('status'), function ($query) use ($request) {
             return $query->where('status', '=', 1);
-        })->with('categories')->withCount('comments');
+        })->with('categories')->with('user')->withCount('comments');
 
         if (!auth()->user()->is_admin) {
             $posts = $posts->where('user_id', auth()->user()->id);
@@ -59,13 +59,14 @@ class PostAdminController extends Controller
      */
     public function store(PostRequest $request)
     {
-        $image=$request->imageUpload->store('public');
+        $image=$request->hasFile('imageUpload') ? $request->imageUpload->store('public'): null;
+
         $post = new Post;
         $post->title = title_case($request->title);
         $post->body = $request->body;
         $post->user_id = auth()->user()->id;
         $post->status = auth()->user()->is_admin ? $request->status : 1;
-        $post->photo_path=Storage::url($image);
+        $post->photo_path= basename($image);
         $post->save();
         $post->categories()->sync($request->category);
 
@@ -95,10 +96,20 @@ class PostAdminController extends Controller
      */
     public function update(PostRequest $request, $id)
     {
-        $image=$request->imageUpload->store('public');
+
         $post = Post::findOrFail($id);
+
+        if($request->hasFile('imageUpload'))
+        {
+            Storage::delete($post->photo_path);
+            $image=basename($request->imageUpload->store('public'));
+        }
+        else{
+            $image=$post->photo_path;
+        }
+
         $post->title = $request->title;
-        $post->photo_path=Storage::url($image);
+        $post->photo_path=$image;
         $post->body = $request->body;
         $post->status = auth()->user()->is_admin ? $request->status : 1;
         $post->categories()->sync($request->category);
@@ -117,6 +128,8 @@ class PostAdminController extends Controller
     {
         $post = Post::findOrFail($id);
         $post->delete();
+
+        Storage::delete($post->photo_path);
 
         return back()->with('success', 'One post was deleted');
     }

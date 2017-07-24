@@ -63,6 +63,7 @@
                                     <th>Title</th>
                                     <th>Body</th>
                                     <th>Category</th>
+                                    <th>Author</th>
                                     <th> @if(auth()->user()->is_admin) Change status  @else Status @endif</th>
                                     <th>Comments</th>
                                     <th>Actions</th>
@@ -73,17 +74,24 @@
                             @forelse($posts as $post)
                                 <tr>
 
-                                    <td> <img src="{{asset($post->photo_path)}}" style="width:30px;height:30px;"></td>
+                                    <td>
+                                        @if(!$post->photo_path)
+                                            <img src="{{asset('storage/default.png')}}" height="30" width="30">
+                                        @else
+                                            <img src="{{asset('storage/'.$post->photo_path)}}" height="30" width="30">
+                                        @endif
+                                    </td>
                                     <td>{{str_limit($post->title,10)}}</td>
-                                    <td> {{str_limit($post->body,30)}}</td>
+                                    <td> {!!str_limit($post->body,30)!!}</td>
                                     <td>
                                         @foreach($post->categories as $category)
                                             {{$category->title}}
                                             @if(!$loop->last)
                                                 ,
-                                                @endif
+                                            @endif
                                         @endforeach
                                     </td>
+                                    <td>{{$post->user->name}}</td>
                                     <td>
                                         @if(auth()->user()->is_admin)
                                             <form action="{{route('post.approve',$post->id)}}" method="get"
