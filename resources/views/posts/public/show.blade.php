@@ -14,7 +14,7 @@
                         @if(!$post->photo_path)
                             <img src="{{asset('storage/default.png')}}" height="200" width="720">
                         @else
-                            <img src="{{asset('storage/'.$post->photo_path)}}" height="200" width="720">
+                            <img src="{{$post->photo_url}}" height="200" width="720">
                         @endif
                         <h1>{{($post->title)}}</h1>
                         Author: {{$post->user->name}}

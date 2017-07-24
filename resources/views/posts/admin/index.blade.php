@@ -78,7 +78,7 @@
                                         @if(!$post->photo_path)
                                             <img src="{{asset('storage/default.png')}}" height="30" width="30">
                                         @else
-                                            <img src="{{asset('storage/'.$post->photo_path)}}" height="30" width="30">
+                                            <img src="{{$post->photo_url}}" height="30" width="30">
                                         @endif
                                     </td>
                                     <td>{{str_limit($post->title,10)}}</td>
@@ -136,6 +136,7 @@
                         <div class="text-center">
                             {{ $posts->appends(request()->all())->links() }}
                         </div>
+
                     </div>
                 </div>
             </div>

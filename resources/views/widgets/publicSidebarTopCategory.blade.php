@@ -13,7 +13,6 @@
                 @endforeach
             </ul>
             <div class="text-center">
-                {{--{{ $posts->appends(all())->links()}}--}}
             </div>
         </div>
     </div>
