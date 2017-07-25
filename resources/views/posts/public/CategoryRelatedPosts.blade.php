@@ -38,7 +38,9 @@
                                 <p>
                                     {!! str_limit($post->body,200) !!}
                                 </p>
+
                             </article>
+
                             <hr>
                         @empty
                             {{"No data found"}}

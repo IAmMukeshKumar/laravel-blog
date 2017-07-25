@@ -54,13 +54,10 @@
                                 <select name="category[]" multiple class="form-control category-select">
                                     @foreach($categories as $category)
                                         <option value="{{$category->id}}"
-                                                @if(in_array($category->id,old('category',[])))
+                                                @if(in_array($category->id, old('category',$post->categories->pluck('id')->toArray())))
                                                 selected
                                                 @endif
                                         >{{$category->title}}</option>
-                                    @endforeach
-                                    @foreach($post->categories as $category)
-                                        <option value="{{$category->id}}" selected>{{$category->title}}</option>
                                     @endforeach
                                 </select>
                                 @if($errors->has('category'))
@@ -83,7 +80,6 @@
                                     </span>
                                     @endif
                                 </div>
-
                             @endif
                             <button type="reset" class="btn btn-outline-primary">Reset</button>
                             <button type="submit" class="btn btn-primary">Update</button>

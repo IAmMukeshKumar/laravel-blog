@@ -87,7 +87,7 @@
                         </table>
 
                         <div class="text-center">
-                            {{--{{ $categories->appends(request()->all())->links() }}--}}
+                            {{ $categories->appends(request()->all())->links() }}
                         </div>
                     </div>
                 </div>

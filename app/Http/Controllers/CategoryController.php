@@ -81,8 +81,9 @@ class CategoryController extends Controller
     {
         User::findOrFail(auth()->user()->is_admin);
         $category = Category::findOrFail($id);
-        $category->category = $request->category;
-        $category->save();
+        $category->title = $request->title;
+        $category->description=$request->description;
+        $category->update();
 
         return back()->with('success', 'Category was updated successfully');
     }

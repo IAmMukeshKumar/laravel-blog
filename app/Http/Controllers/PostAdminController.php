@@ -59,19 +59,39 @@ class PostAdminController extends Controller
      */
     public function store(PostRequest $request)
     {
-        $image=$request->hasFile('imageUpload') ? $request->imageUpload->store('public'): null;
+        $image = $request->hasFile('imageUpload') ? $request->imageUpload->store('public') : null;
 
         $post = new Post;
         $post->title = title_case($request->title);
         $post->body = $request->body;
         $post->user_id = auth()->user()->id;
         $post->status = auth()->user()->is_admin ? $request->status : 1;
-        $post->photo_path= basename($image);
+        $post->photo_path = basename($image);
         $post->save();
         $post->categories()->sync($request->category);
 
         return back()->with('success', 'Post was saved successfully.');
     }
+
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $post = Post::findOrFail($id);
+
+        $comments = $post->comments;
+        if ($post->user_id == auth()->user()->id OR auth()->user()->is_admin) {
+            return view('posts.public.show', ['post' => $post, 'comments' => $comments]);
+        } else {
+            return back();
+        }
+    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -99,17 +119,15 @@ class PostAdminController extends Controller
 
         $post = Post::findOrFail($id);
 
-        if($request->hasFile('imageUpload'))
-        {
+        if ($request->hasFile('imageUpload')) {
             Storage::delete($post->photo_path);
-            $image=basename($request->imageUpload->store('public'));
-        }
-        else{
-            $image=$post->photo_path;
+            $image = basename($request->imageUpload->store('public'));
+        } else {
+            $image = $post->photo_path;
         }
 
         $post->title = $request->title;
-        $post->photo_path=$image;
+        $post->photo_path = $image;
         $post->body = $request->body;
         $post->status = auth()->user()->is_admin ? $request->status : 1;
         $post->categories()->sync($request->category);
@@ -129,7 +147,8 @@ class PostAdminController extends Controller
         $post = Post::findOrFail($id);
         $post->delete();
 
-        Storage::delete($post->photo_path);
+        if ($post->photo_path)
+            Storage::delete('public/' . $post->photo_path);
 
         return back()->with('success', 'One post was deleted');
     }

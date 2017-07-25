@@ -73,7 +73,6 @@
                             <tbody>
                             @forelse($posts as $post)
                                 <tr>
-
                                     <td>
                                         @if(!$post->photo_path)
                                             <img src="{{asset('storage/default.png')}}" height="30" width="30">
@@ -82,7 +81,7 @@
                                         @endif
                                     </td>
                                     <td>{{str_limit($post->title,10)}}</td>
-                                    <td> {!!str_limit($post->body,30)!!}</td>
+                                    <td>{!!str_limit($post->body,30)!!}</td>
                                     <td>
                                         @foreach($post->categories as $category)
                                             {{$category->title}}
@@ -120,7 +119,7 @@
                                             <button type="submit" class="btn btn-danger btn-xs">
                                                 <i class="glyphicon glyphicon-trash"></i></button>
                                             <a class="btn btn-primary btn-xs"
-                                               href="{{route('publicpost.show',['id' => $post->id, 'slug' => str_slug($post->title)])}}">Read</a>
+                                               href="{{route('post.show',['id' => $post->id])}}">Read</a>
                                         </form>
 
                                     </td>

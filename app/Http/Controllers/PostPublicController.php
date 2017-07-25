@@ -31,10 +31,12 @@ class PostPublicController extends Controller
         return view('posts.public.index', ['posts' => $posts]);
     }
 
-    public function showCategoryPosts($id, $slug)
+    public function showCategoryPosts($id,$slug)
     {
-        $category = Category::findOrFail($id)->load('posts');
-
+        $category = Category::findOrFail($id)->load(['posts'=>function($query)
+    {
+      $query->where('status',0);
+    }]);
         return view('posts.public.CategoryRelatedPosts',compact('category'));
     }
 
@@ -48,14 +50,18 @@ class PostPublicController extends Controller
     {
         $post = Post::findOrFail($id);
 
-        if ($slug !== str_slug($post->title)) {
-
-            return redirect(route('publicpost.show', ['id' => $post->id, 'slug' => str_slug($post->title)]), 301);
+        if($post->status==0)
+        {
+            if ($slug !== str_slug($post->title)) {
+                return redirect(route('publicpost.show', ['id' => $post->id, 'slug' => str_slug($post->title)]), 301);
+            }
+            $comments = $post->comments;
+            return view('posts.public.show', ['post' => $post, 'comments' => $comments]);
+        }
+        else{
+            return back();
         }
 
-        $comments = $post->comments;
-
-        return view('posts.public.show', ['post' => $post, 'comments' => $comments]);
 
     }
 

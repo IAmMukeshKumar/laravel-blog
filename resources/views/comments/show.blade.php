@@ -36,12 +36,12 @@
                     </form>
 
                     <hr>
+                @endif
                 @elseif($comment->status)
                     <time title="{{$comment->created_at->toDateTimeString()}}">{{$comment->created_at->diffForHumans()}}</time>
                     <h3>{{$comment->guest->name}} </h3>
                     <p>{{$comment->body}}</p>
                     <hr>
-                @endif
             @endif
         @empty
             {{"No comment available"}}
