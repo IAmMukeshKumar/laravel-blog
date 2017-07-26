@@ -88,7 +88,8 @@ class PostAdminController extends Controller
         if ($post->user_id == auth()->user()->id OR auth()->user()->is_admin) {
             return view('posts.public.show', ['post' => $post, 'comments' => $comments]);
         } else {
-            return back();
+
+            return redirect()->route('publicpost.index');
         }
     }
 

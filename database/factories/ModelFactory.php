@@ -47,7 +47,7 @@ $factory->define(App\Post::class, function (Faker\Generator $faker) {
         'body' => $faker->paragraph(50),
         'status' => rand(0, 1),
         'user_id' => function () {
-            return factory(App\User::class)->create()->id;
+        return factory(App\User::class)->create()->id;
         }
 
     ];

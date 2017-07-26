@@ -18,9 +18,11 @@ class AdminTableSeeder extends Seeder
             'email' => 'william.mukesh@ithands.biz',
             'password' => bcrypt('password'),
             'is_admin' => 1,
+            'remember_token' => str_random(10),
+            'created_at' => \Carbon\Carbon::now(),
         ]);
 
-     factory(App\User::class, 10)->create();
+    // factory(App\User::class, 10)->create();
 
     }
 }

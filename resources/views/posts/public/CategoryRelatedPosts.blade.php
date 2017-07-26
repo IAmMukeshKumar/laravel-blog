@@ -45,7 +45,6 @@
                         @empty
                             {{"No data found"}}
                         @endforelse
-
                     </div>
                 </div>
             </div>
