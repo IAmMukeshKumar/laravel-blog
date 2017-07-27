@@ -61,7 +61,6 @@
                                 <tr>
                                     <th>Image</th>
                                     <th>Title</th>
-                                    <th>Body</th>
                                     <th>Category</th>
                                     <th>Author</th>
                                     <th> @if(auth()->user()->is_admin) Change status  @else Status @endif</th>
@@ -81,7 +80,6 @@
                                         @endif
                                     </td>
                                     <td>{{str_limit($post->title,10)}}</td>
-                                    <td>{!!str_limit($post->body,30)!!}</td>
                                     <td>
                                         @foreach($post->categories as $category)
                                             {{$category->title}}
