@@ -42,8 +42,8 @@
 
                             <div class="form-group @if($errors->has('body')) has-error @endif">
                                 <label>Body</label>
-                                <textarea id="bodyField" class="form-control" rows="10" placeholder="Write something"
-                                          name="body"> {{old('body',$post->body)}}</textarea>
+                                <textarea id="bodyField" placeholder="Write something"
+                                          name="body"> {{htmlentities(old('body',$post->body))}} </textarea>
                                 @if($errors->has('body'))
                                     <p class="help-block">{{$errors->first('body')}}</p>
                                 @endif
