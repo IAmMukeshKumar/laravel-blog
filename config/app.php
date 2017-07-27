@@ -168,7 +168,7 @@ return [
          */
         Laravel\Tinker\TinkerServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
-
+        JeroenNoten\LaravelCkEditor\ServiceProvider::class,
         /*
          * Application Service Providers...
          */

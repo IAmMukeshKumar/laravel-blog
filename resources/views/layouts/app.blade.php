@@ -85,5 +85,7 @@
 <script src="{{mix('js/manifest.js')}}"></script>
 <script src="{{mix('js/vendor.js')}}"></script>
 <script src="{{mix('js/app.js')}}"></script>
+@ckeditor('bodyField',['removeButtons' => 'Save,Image,Form,Templates,TextField,Checkbox,Button,ImageButton,document,CreateDiv,Language,Anchor,Iframe,CreatePlaceholder,About,Flash,Table,PageBreak,HiddenField,SelectionField,Textarea,Radio,Paste,PasteText,PasteFromWord'])
+
 </body>
 </html>

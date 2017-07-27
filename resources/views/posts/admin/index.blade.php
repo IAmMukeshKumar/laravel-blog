@@ -61,7 +61,6 @@
                                 <tr>
                                     <th>Image</th>
                                     <th>Title</th>
-                                    <th>Body</th>
                                     <th>Category</th>
                                     <th>Author</th>
                                     <th> @if(auth()->user()->is_admin) Change status  @else Status @endif</th>

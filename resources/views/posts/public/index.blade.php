@@ -21,6 +21,7 @@
                                         <option value="45" @if(request('paginate') === '45') selected @endif>45</option>
                                     </select>
                                 </div>
+
                                 {{--Search by title--}}
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="title" placeholder="Title"
