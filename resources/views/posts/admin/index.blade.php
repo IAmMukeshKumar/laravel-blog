@@ -81,7 +81,7 @@
                                         @endif
                                     </td>
                                     <td>{{str_limit($post->title,10)}}</td>
-                                    <td>{!!str_limit($post->body,30)!!}</td>
+                                    <td>{!!str_limit($post->body,50)!!}</td>
                                     <td>
                                         @foreach($post->categories as $category)
                                             {{$category->title}}

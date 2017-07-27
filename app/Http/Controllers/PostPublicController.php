@@ -54,8 +54,6 @@ class PostPublicController extends Controller
         }
         $comments = $post->comments;
         return view('posts.public.show', ['post' => $post, 'comments' => $comments]);
-
-
     }
 
 }
