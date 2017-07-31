@@ -76,7 +76,7 @@
                                         @if(!$post->photo_path)
                                             <img src="{{asset('storage/default.png')}}" height="30" width="30">
                                         @else
-                                            <img src="{{$post->photo_url}}" height="30" width="30">
+                                            <img src="{{asset($post->photo_thumbnail)}}">
                                         @endif
                                     </td>
                                     <td>{{str_limit($post->title,10)}}</td>

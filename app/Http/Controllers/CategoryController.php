@@ -21,7 +21,7 @@ class CategoryController extends Controller
         $categories = Category::where(function ($query) use ($request) {
             if ($request->has('title'))
                 $query->where('title', 'like', '%' . $request->input('title') . '%');
-        })->withCount('posts')->orderBy('posts_count','desc')->paginate((int)$paginate);
+        })->withCount('posts')->orderBy('posts_count', 'desc')->paginate((int)$paginate);
 
         return view('categories.index', compact('categories'));
     }
@@ -46,13 +46,13 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-            User::findOrFail(auth()->user()->is_admin);
-            $category = new Category;
-            $category->title = $request->title;
-            $category->description = $request->description;
-            $category->save();
+        User::findOrFail(auth()->user()->is_admin);
+        $category = new Category;
+        $category->title = $request->title;
+        $category->description = $request->description;
+        $category->save();
 
-            return back()->with('success', 'Category was added successfully');
+        return back()->with('success', 'Category was added successfully');
     }
 
 
@@ -82,7 +82,7 @@ class CategoryController extends Controller
         User::findOrFail(auth()->user()->is_admin);
         $category = Category::findOrFail($id);
         $category->title = $request->title;
-        $category->description=$request->description;
+        $category->description = $request->description;
         $category->update();
 
         return back()->with('success', 'Category was updated successfully');

@@ -17,7 +17,7 @@
                                 @if(!$post->photo_path)
                                     <img src="{{asset('storage/default.png')}}" height="200" width="200">
                                 @else
-                                    <img src="{{$post->photo_url}}" height="200" width="200">
+                                    <img src="{{$post->photo_medium}}">
                                 @endif
                                 <h2>
                                     <a href="{{route('publicpost.show',['id' => $post->id, 'slug' => str_slug($post->title)])}}">{{title_case($post->title)}}</a>

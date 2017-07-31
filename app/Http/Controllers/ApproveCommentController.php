@@ -8,6 +8,7 @@ use App\Comment;
 
 class ApproveCommentController extends Controller
 {
+    //Approve comment
     public function approve($id)
     {
         $comment = Comment::findOrFail($id);
@@ -17,6 +18,7 @@ class ApproveCommentController extends Controller
         return back()->with('success', 'Comment status was changed successfully');
     }
 
+    //Delete comment
     public function delete($id)
     {
         $comment = Comment::findOrFail($id);

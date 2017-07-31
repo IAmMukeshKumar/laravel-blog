@@ -49,7 +49,8 @@
                                 @if(!$post->photo_path)
                                     <img src="{{asset('storage/default.png')}}" height="200" width="200">
                                 @else
-                                    <img src="{{$post->photo_url}}" height="200" width="200">
+                                    <img src="{{asset($post->photo_medium)}}">
+
                                 @endif
 
                                 <h2>

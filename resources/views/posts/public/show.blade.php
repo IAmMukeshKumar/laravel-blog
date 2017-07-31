@@ -14,7 +14,7 @@
                         @if(!$post->photo_path)
                             <img src="{{asset('storage/default.png')}}" height="200" width="720">
                         @else
-                            <img src="{{$post->photo_url}}" height="200" width="720">
+                            <img src="{{asset($post->photo_large)}}">
                         @endif
                         <h1>{{($post->title)}}</h1>
                         Author: {{$post->user->name}}
@@ -35,7 +35,11 @@
                         </article>
                     </div>
                 </div>
+
+                //Create comment
                 @include('comments.create')
+
+                //Show aproved comment
                 @include('comments.show')
             </div>
             @include('widgets.publicSidebarTopCategory')

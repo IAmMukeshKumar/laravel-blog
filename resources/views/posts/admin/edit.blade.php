@@ -17,10 +17,11 @@
                             {{method_field('PATCH')}}
                             {{csrf_field()}}
 
+                            {{--Edit photo--}}
                             @if(!$post->photo_path)
                                 <img src="{{asset('storage/default.png')}}" height="128" width="128">
                             @else
-                                <img src="{{asset('storage/'.$post->photo_path)}}" height="128" width="128">
+                                <img src="{{asset($post->photo_medium)}}">
                             @endif
 
                             <div class="form-group @if($errors->has('imageUpload')) has-error @endif">
@@ -31,6 +32,7 @@
                                 @endif
                             </div>
 
+                            {{--Edit title--}}
                             <div class="form-group @if($errors->has('title')) has-error @endif">
                                 <label> Title</label>
                                 <input type="text" class="form-control" placeholder="Title" name="title"
@@ -40,6 +42,7 @@
                                 @endif
                             </div>
 
+                            {{--Edit body--}}
                             <div class="form-group @if($errors->has('body')) has-error @endif">
                                 <label>Body</label>
                                 <textarea id="bodyField" placeholder="Write something"
@@ -49,6 +52,7 @@
                                 @endif
                             </div>
 
+                            {{--Edit category--}}
                             <div class="form-group @if($errors->has('category')) has-error @endif">
                                 Category :
                                 <select name="category[]" multiple class="form-control category-select">
@@ -65,6 +69,7 @@
                                 @endif
                             </div>
 
+                            {{--Edit status--}}
                             @if(auth()->user()->is_admin)
                                 <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
                                     <label for="status" class="col-md-4 control-label">status</label>
