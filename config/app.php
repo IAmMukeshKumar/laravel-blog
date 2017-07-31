@@ -170,6 +170,7 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         JeroenNoten\LaravelCkEditor\ServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Chencha\Share\ShareServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -231,7 +232,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Image' => Intervention\Image\Facades\Image::class,
-
+        'Share' => Chencha\Share\ShareFacade::class,
     ],
 
 ];

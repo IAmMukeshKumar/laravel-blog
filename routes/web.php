@@ -42,4 +42,9 @@ Route::middleware('auth')->group(function () {
 Route::post('post/{post}/comment', 'CommentController@store')->name('comment.store');
 Route::get('category/{id}/{slug?}', 'PostPublicController@showCategoryPosts')->name('category.posts');
 
-
+//Social share
+Route::get('twitter', function()
+{
+    $link=Share::load("http://laravel-blog.dev/show/13/with-photo","Name")->facebook();
+    return redirect($link);
+});

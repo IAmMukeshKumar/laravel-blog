@@ -70,17 +70,15 @@ class PostAdminController extends Controller
             Storage::disk('public')->put('thumbnail' . $name, $thumbnail->stream());
             Storage::disk('public')->put('medium' . $name, $medium->stream());
             Storage::disk('public')->put('large' . $name, $large->stream());
-        }
-        else
-        {
-            $name=null;
+        } else {
+            $name = null;
         }
         $post = new Post;
         $post->title = title_case($request->title);
         $post->body = $request->body;
         $post->user_id = auth()->user()->id;
         $post->status = auth()->user()->is_admin ? $request->status : 1;
-        $post->photo_path =$name;
+        $post->photo_path = $name;
         $post->save();
         $post->categories()->sync($request->category);
 

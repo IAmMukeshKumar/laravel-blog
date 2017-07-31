@@ -36,10 +36,10 @@
                     </div>
                 </div>
 
-                //Create comment
+                {{--Create comment--}}
                 @include('comments.create')
 
-                //Show aproved comment
+                {{--Show aproved comment--}}
                 @include('comments.show')
             </div>
             @include('widgets.publicSidebarTopCategory')
