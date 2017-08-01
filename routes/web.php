@@ -17,6 +17,8 @@
 Route::get('/', 'PostPublicController@index')->name('publicpost.index');
 Route::get('show/{id}/{slug?}', 'PostPublicController@show')->name('publicpost.show')->where(['id' => '[0-9]+']);;
 
+//Social share
+Route::get('facebook/{id}','PostPublicController@facebook')->name('ShareOnFacebook');
 
 //  Auth routing
 Auth::routes();
@@ -30,7 +32,6 @@ Route::middleware('auth')->group(function () {
         'except' => 'show'
     ]);
 
-
     Route::get('approve/{comment}', 'ApproveCommentController@approve')->name('comment.approve');
     Route::get('delete/{comment}', 'ApproveCommentController@delete')->name('comment.delete');
     Route::get('Post/{post}', 'ApprovePostController@approve')->name('post.approve');
@@ -41,10 +42,3 @@ Route::middleware('auth')->group(function () {
 // Comments route
 Route::post('post/{post}/comment', 'CommentController@store')->name('comment.store');
 Route::get('category/{id}/{slug?}', 'PostPublicController@showCategoryPosts')->name('category.posts');
-
-//Social share
-Route::get('twitter', function()
-{
-    $link=Share::load("http://laravel-blog.dev/show/13/with-photo","Name")->facebook();
-    return redirect($link);
-});

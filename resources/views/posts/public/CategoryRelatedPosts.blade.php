@@ -15,7 +15,7 @@
                         @forelse($category->posts as $post)
                             <article>
                                 @if(!$post->photo_path)
-                                    <img src="{{asset('storage/default.png')}}" height="200" width="200">
+                                    <img src="{{asset('storage/DefaultImage/default.png')}}" height="200" width="200">
                                 @else
                                     <img src="{{$post->photo_medium}}">
                                 @endif

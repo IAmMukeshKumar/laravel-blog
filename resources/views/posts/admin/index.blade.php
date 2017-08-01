@@ -74,7 +74,7 @@
                                 <tr>
                                     <td>
                                         @if(!$post->photo_path)
-                                            <img src="{{asset('storage/default.png')}}" height="30" width="30">
+                                            <img src="{{asset('storage/DefaultImage/default.png')}}" height="30" width="30">
                                         @else
                                             <img src="{{asset($post->photo_thumbnail)}}">
                                         @endif

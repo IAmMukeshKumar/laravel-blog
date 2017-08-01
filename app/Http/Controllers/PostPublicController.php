@@ -56,4 +56,13 @@ class PostPublicController extends Controller
         return view('posts.public.show', ['post' => $post, 'comments' => $comments]);
     }
 
+    //Share post's link on facebook
+    public function facebook($id)
+    {
+        $post=Post::where('status',0)->findOrFail($id);
+
+        $link=\Share::load("http://laravel-blog.dev/show/".$id."/".$post->title,"")->facebook();
+        return redirect($link);
+    }
+
 }

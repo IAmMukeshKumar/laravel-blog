@@ -12,7 +12,7 @@
                     <div class="panel-body">
 
                         @if(!$post->photo_path)
-                            <img src="{{asset('storage/default.png')}}" height="200" width="720">
+                            <img src="{{asset('storage/DefaultImage/default.png')}}" height="200" width="720">
                         @else
                             <img src="{{asset($post->photo_large)}}">
                         @endif
@@ -32,6 +32,11 @@
                             </p>
                             <hr>
                             <p> {!! $post->body !!}</p>
+                            <hr>
+                            @if($post->status==0)
+                                Share on :
+                            <a href="{{route('ShareOnFacebook',$post->id)}}"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+                            @endif
                         </article>
                     </div>
                 </div>
