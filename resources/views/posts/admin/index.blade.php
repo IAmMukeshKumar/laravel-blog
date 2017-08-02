@@ -130,14 +130,13 @@
                             @endforelse
                             </tbody>
                         </table>
-
                         <div class="text-center">
                             {{ $posts->appends(request()->all())->links() }}
                         </div>
-
                     </div>
                 </div>
             </div>
+            @include('widgets.chartsSidebar')
         </div>
     </div>
 @endsection

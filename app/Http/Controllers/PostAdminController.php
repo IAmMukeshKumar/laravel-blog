@@ -30,13 +30,16 @@ class PostAdminController extends Controller
             return $query->where('status', '=', 1);
         })->with('categories')->with('user')->withCount('comments');
 
+        $postsCountPublic=Post::whereStatus(0)->count();
+        $postsCountDraft=Post::whereStatus(1)->count();
+
         if (!auth()->user()->is_admin) {
             $posts = $posts->where('user_id', auth()->user()->id);
         }
 
         $posts = $posts->latest()->paginate((int)$paginate);
 
-        return view('posts.admin.index', compact('posts'));
+        return view('posts.admin.index', ['posts'=>$posts,'postsCountPublic'=>$postsCountPublic,'postsCountDraft'=>$postsCountDraft]);
     }
 
     /**

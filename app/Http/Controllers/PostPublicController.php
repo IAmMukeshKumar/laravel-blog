@@ -27,7 +27,6 @@ class PostPublicController extends Controller
             return $query;
         })->latest()->with('categories')->paginate((int)$paginate);
 
-
         return view('posts.public.index', ['posts' => $posts]);
     }
 
