@@ -1,4 +1,3 @@
-
 <div class="col-md-9 col-md-offset-2">
     <div class="panel panel-default">
         <div class="panel-body">
@@ -19,7 +18,7 @@
             var data = google.visualization.arrayToDataTable([
                 ['Task', 'This is chart'],
                 ['Approved',{{ $postsCountPublic }}],
-                ['Unapproved', {{ $postsCountDraft }}],
+                ['Disapproved', {{ $postsCountDraft }}],
             ]);
 
             var options = {

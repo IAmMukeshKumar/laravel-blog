@@ -35,6 +35,9 @@ class PostAdminController extends Controller
 
         if (!auth()->user()->is_admin) {
             $posts = $posts->where('user_id', auth()->user()->id);
+            $postsCountPublic=Post::whereStatus(0)->where('user_id', auth()->user()->id)->count();
+            $postsCountDraft=Post::whereStatus(1)->where('user_id', auth()->user()->id)->count();
+
         }
 
         $posts = $posts->latest()->paginate((int)$paginate);
