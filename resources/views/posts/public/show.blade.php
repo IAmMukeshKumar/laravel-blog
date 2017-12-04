@@ -29,6 +29,15 @@
                                         ,
                                     @endif
                                 @endforeach
+                                | Tags:
+                                @foreach($post->categories as $category)
+                                    @foreach($category->tags as $tag)
+                                        {{$tag->name}}
+                                        @if(!$loop->last)
+                                            ,
+                                        @endif
+                                    @endforeach
+                                @endforeach
                             </p>
                             <hr>
                             <p> {!! $post->body !!}</p>

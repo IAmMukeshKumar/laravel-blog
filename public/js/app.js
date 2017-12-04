@@ -28,12 +28,29 @@ __webpack_require__("./node_modules/bootstrap-sass/assets/javascripts/bootstrap.
 
 
 jQuery(".category-select").select2({});
-
+jQuery(".tag-select").select2({});
 __webpack_require__("./node_modules/trumbowyg/dist/trumbowyg.js");
 
 $.trumbowyg.svgPath = __WEBPACK_IMPORTED_MODULE_1_trumbowyg_dist_ui_icons_svg___default.a;
 $('.post-editor').trumbowyg({
-  autogrow: true
+    autogrow: true
+});
+
+//Add Tags
+$(document).ready(function () {
+
+    $(".add-more").click(function () {
+        var html = $(".copy").html();
+        $(".after-add-more").after(html);
+    });
+
+    $("body").on("click", ".remove", function () {
+        $(this).parents(".control-group").remove();
+    });
+
+    $("body").on("click", ".remove", function () {
+        $(this).parent(".input-group").remove();
+    });
 });
 /* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__("./node_modules/jquery/dist/jquery.js"), __webpack_require__("./node_modules/jquery/dist/jquery.js"), __webpack_require__("./node_modules/jquery/dist/jquery.js")))
 

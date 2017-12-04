@@ -31,6 +31,9 @@ Route::middleware('auth')->group(function () {
         'except' => 'show'
     ]);
 
+    Route::get('tag/{id}','TagController@add')->name('tag.add');
+    Route::post('tag/store/{id}','TagController@store')->name('tag.store');
+
     Route::get('approve/{comment}', 'ApproveCommentController@approve')->name('comment.approve');
     Route::get('delete/{comment}', 'ApproveCommentController@delete')->name('comment.delete');
     Route::get('Post/{post}', 'ApprovePostController@approve')->name('post.approve');

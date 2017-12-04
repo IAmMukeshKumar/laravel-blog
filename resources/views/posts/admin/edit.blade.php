@@ -19,7 +19,7 @@
 
                             {{--Edit photo--}}
                             @if(!$post->photo_path)
-                                <img src="{{asset('storage/default.png')}}" height="128" width="128">
+                                <img src="{{asset('storage/DefaultImage/default.png')}}" height="128" width="128">
                             @else
                                 <img src="{{asset($post->photo_medium)}}">
                             @endif

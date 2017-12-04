@@ -6,7 +6,7 @@ use App\Http\Requests\CategoryRequest;
 use Illuminate\Http\Request;
 use App\Category;
 use App\User;
-
+use App\Tag;
 class CategoryController extends Controller
 {
     /**

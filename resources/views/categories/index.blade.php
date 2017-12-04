@@ -43,16 +43,27 @@
                             <thead>
                             <tr>
                                 <th>Title</th>
+                                <th>Tags</th>
                                 <th>Description</th>
                                 <th>Posts</th>
                                 @if(auth()->user()->is_admin)
-                                    <th>Actions</th>@endif
+                                    <th>Actions</th>
+                                    <th>Add Tag</th>
+                                @endif
                             </tr>
                             </thead>
                             <tbody>
                             @forelse($categories as $category)
                                 <tr>
                                     <td>{{$category->title}}</td>
+                                    <td>
+                                        @foreach($category->tags as $tag)
+                                            {{$tag->name}}
+                                            @if(!$loop->last)
+                                                ,
+                                            @endif
+                                        @endforeach
+                                    </td>
                                     <td>{{$category->description}}</td>
                                     <td>{{$category->posts_count}}</td>
                                     @if(auth()->user()->is_admin)
@@ -71,7 +82,12 @@
                                                         <i class="glyphicon glyphicon-trash"></i></button>
                                                 @endif
                                             </form>
-                                        </td>@endif
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-primary btn-xs"
+                                               href="{{route('tag.add',$category->id)}}"><i
+                                                        class="glyphicon glyphicon-plus"></i></a></td>
+                                    @endif
                                 </tr>
                             @empty
                                 <div class="text-center">
@@ -80,9 +96,9 @@
                             @endforelse
 
                             @if(auth()->user()->is_admin)
-                            <a class="btn btn-primary btn-xs" href="{{route('category.create')}}"><i
-                                        class="glyphicon glyphicon-plus"></i> New category</a>
-                                @endif
+                                <a class="btn btn-primary btn-xs" href="{{route('category.create')}}"><i
+                                            class="glyphicon glyphicon-plus"></i> New category</a>
+                            @endif
                             </tbody>
                         </table>
 
